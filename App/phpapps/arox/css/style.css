@@ -1,0 +1,147 @@
+body{	font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#333333;}
+p{ font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333333; line-height:19px; padding:5px 8px 0px 5px;} 
+
+.copylink{	font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#00CCCC; text-decoration:none; }
+
+.copylink:hover{	font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px; color: #330066; text-decoration:none; }
+
+.enquiry{	margin-left: 0px;	margin-top: 35px;	margin-right: 0px;	margin-bottom: 0px;	background:url(../images/bg6.gif) center top no-repeat #04A6DA fixed; }
+
+.header_left{	background:url(../images/top_bg.png) right top no-repeat; height:299px;}
+.header_mid{	background:url(../images/mid_top.png) left top repeat-x; height:299px;}
+.header_right{	background:url(../images/right_top.png) left top no-repeat; height:299px;}
+.header_lady{	padding-top:10px;}
+
+.school_header_font{ font-family:Arial, Helvetica, sans-serif; font-size:24px; font-weight:500;  color:#333333; text-decoration:none; }
+
+
+/*///////////////////////////////////////////curves main Table//////////////////////////*/
+
+.a1{ background:url(../images/aa_01.gif) right bottom no-repeat; }
+.a2{	background:url(../images/aa_02.gif) left bottom repeat-x;}
+.a3{	background:url(../images/aa_03.gif) left bottom no-repeat;}
+
+.aa_mid{	background:url(../images/mid.jpg) left top repeat-x #FFFFFF ; height:285px;}
+
+.index_topbg{ background:url(../images/index-topbg.jpg)left top repeat-x #FFFFFF;}
+
+.index_left_bg{	background:url(../images/ind_04.gif) right top no-repeat;}
+.index_right_bg{	background:url(../images/ind_06.gif) left top no-repeat;}
+
+.bb4{	background:url(../images/bb_04.gif) #FFFFFF left top repeat-x;}
+.bb6{	background:url(../images/bb_06.gif) #FFFFFF left top  repeat-x;}
+.bb_mid{	background:url(../images/mid2.jpg) left top repeat-x #FFFFFF;}
+
+.aa4{	background:url(../images/aa_04.gif) #FFFFFF left top no-repeat;}
+.cc4{	background:url(../images/cc4.gif) #FFFFFF left top repeat-x;}
+
+.aa6{	background:url(../images/aa_06.gif) #FFFFFF left top no-repeat;}
+
+.cc6{	background:url(../images/cc6.gif) #FFFFFF left top repeat-x;}
+
+
+.aa7{	background:url(../images/aa_07.gif) left  top no-repeat;}
+.aa8{	background:url(../images/aa_08.gif) left top repeat-x;}
+.aa9{	background:url(../images/aa_09.gif) left top no-repeat;}
+
+/*///////////////////////////////////////////Buttons/////////////////////////*/ 
+
+.btn1{	background:url(../images/btn_01.gif) right bottom no-repeat;}
+.btn2{	background:url(../images/btn_02.gif) left bottom repeat-x;}
+.btn3{ background:url(../images/btn_03.gif) left bottom no-repeat;}
+
+
+.btn{	font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold; color:#333333; cursor:pointer; text-decoration:none; }
+.btn:hover{	color:#FF6600; text-decoration:none;}
+
+.top_image{ background:url(../images/EIMS_m12.jpg) left top no-repeat; height:285px;}
+
+.index_image{ background:url(../images/index_EIMS_3.jpg) left top no-repeat;}
+
+
+.heading{	font-family: "Lucida Grande", "Trebuchet MS", Verdana, Helvetica, sans-serif; font-size:17px; padding-left:5px; color:#333333;}
+
+.form_txt{	font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; color:#000000; padding-left:30px; }
+
+.dot{	font-size:10px; color:#000000;}
+
+.heading2{	font-family: "Lucida Grande", "Trebuchet MS", Verdana, Helvetica, sans-serif; font-size:14px; padding-left:5px; font-weight:bold; color:#FF6600;}
+
+.txtbx{	width:160px; height:19px; border:#CCCCCC solid 1px; }
+.selectbx{ width:160px; height:22px; border:#CCCCCC solid 1px; }
+.selectbxlong{ height:19px; border:#CCCCCC solid 1px; }
+.messagebx{	width:160px; height:65px; border:#CCCCCC solid 1px; }	
+
+.copy{	font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#00CCCC; }
+
+
+.heading3{	font-family: "Lucida Grande", "Trebuchet MS", Verdana, Helvetica, sans-serif; font-size:17px; padding-left:5px; color:#333333;}
+
+.heading4{	font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold; color:#990033; text-transform:uppercase;}
+
+.heading5{	font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold; color:#04A6DA; }
+
+.t1{font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; color:#000000; padding-left:5px;}
+
+/*/////////////////////////////////////backgrounds/////////////////////////*/
+
+.aboutus{	margin-left: 0px;	margin-top: 35px;	margin-right: 0px;	margin-bottom: 0px; background:url(../images/bg_about.gif) center top no-repeat #02abe0 fixed; }
+
+.enquiry_1{	margin-left: 0px;	margin-top: 35px;	margin-right: 0px;	margin-bottom: 0px; background:url(../images/bg_enquiry.gif) center top no-repeat #a5e3f7 fixed; }
+
+.contactus{	margin-left: 0px;	margin-top: 35px;	margin-right: 0px;	margin-bottom: 0px; background:url(../images/bg_contactus.gif) center top no-repeat #07ade1 fixed; }
+
+.login{	margin-left: 0px;	margin-top: 35px;	margin-right: 0px;	margin-bottom: 0px; background:url(../images/bg_login.gif) center top no-repeat #95e3fc fixed; }
+
+/*////////////////////////////////////////login page/////////////////*/
+
+.rec2{	background:url(../images/dd_02.gif) left bottom repeat-x;}
+.rec4{	background:url(../images/dd_04.gif) #48C6ED left top repeat-x;}
+.rec5{	background:url(../images/dd_mid.gif) #48C6ED left top repeat-x;}
+.rec6{	background:url(../images/dd_06.gif) #48C6ED right top repeat-y;}
+.rec8{	background:url(../images/dd_08.gif) left bottom repeat-x;}
+/*.loginbg{	background:url(../images/login_bg.gif) left top no-repeat; padding:8px 35px 15px 10px; }*/
+.t2{font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px; color: #FF6600; padding-left:1px; text-decoration:underline;}
+.t2:hover{	text-decoration:none; color:#0099CC;}
+.loginbg{ background:url(../images/login_new2.jpg) left top no-repeat; padding:8px 35px 15px 10px; }
+
+/*///////////////////////////new_main table curves//////////////////*/
+
+.ww2{	background:url(../images/ww_07.png) left bottom repeat-x;}
+.ww8{	background:url(../images/ww_15.png)  left top repeat-x;}
+
+.maintopbg{	background: url(../images/top_1.jpg) #FFFFFF left top repeat-x;}
+
+
+/*/////////////////////////19-11-2009///////////////////////*/
+
+.t3{font-family:Verdana, Arial, Helvetica, sans-serif; font-size:10px; color: #FF3300; padding-left:1px; }
+.t4{font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px; color: #000000; padding-left:1px; }
+
+/*/////////////////////////forgotpassword///////////////////////*/
+.forgot_bg{background:url(../images/forget-middle.gif) repeat-y;
+}
+.forgot_text{font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; color:#666666; padding-left:15px;}
+.forgot_text1{font-family:Verdana, Arial, Helvetica, sans-serif; font-size:15px; color:#0066CC; padding-left:15px; font-weight:bold;}
+
+
+
+/*/////////////////////////new css 23.12.09///////////////////////*/
+.j{background:url(../images/login-right.jpg) no-repeat left top;
+  height:318px;
+  }
+.j1{background:url(../images/login-middle.jpg) repeat-x left top;
+   height:318px;
+ }
+ .j2{background:url(../images/pas-middletop.gif) repeat-x left top;
+     height:10px;
+}
+.j3{background:url(../images/left.gif) repeat-y;
+}
+.j4{background:url(../images/pas-bottommiddle.gif) repeat-x;
+}
+.j5{background:url(../images/right.gif) repeat-y;
+}
+.j6{background:#FFFFFF;
+}
+	     

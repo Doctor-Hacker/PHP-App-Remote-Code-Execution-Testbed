@@ -1,0 +1,313 @@
+body {
+	background-color: #ffffff;
+	font: normal 10pt tahoma;
+	margin: 0px;
+}
+
+
+/* ******************* Major DIVs ************************** */
+
+#container {
+		   clear:both;
+}
+#frame_top {
+		   background-image: url(images/frame_top4.gif);
+		   width: 800px;
+		   height: 155px;
+}
+#frame_top_line {
+			border-top: #000000 3px solid;
+			margin-top: 0px;
+			margin-left: 25px;
+			width: 745px;
+}
+
+#frame_middle {
+		   background-image: url(images/frame_middle.gif);
+		   width: 800px;
+}
+
+/* ***************** Frame Left **************************** */
+
+#frame_left {
+			float: left;
+			top: 0px;
+			left: 0px;
+			padding-top: 10px;
+			/padding-top: 0px;
+			margin-left: 35px;
+			/margin-left: 18px;
+			width: 190px;
+			/width: 190px;
+			height: 390px;
+			overflow: auto;
+}
+
+#frame_left a:link, #frame_left a:visited, #frame_left a:active {
+			font: bold 10pt tahoma;
+			text-decoration: none;
+	  		color: rgb(81,110,202);
+}
+#frame_left a:hover {
+			background-color: rgb(81,110,202);
+			color: #ffffff;
+}
+
+/* **************** Frame Right **************************** */
+
+#frame_right {
+			margin-left: 25px;
+			/margin-left: 245px;
+			width: 515px;
+			/width: 515px;
+			height: 390px;
+			overflow: auto;
+			padding-top: 10px;
+			/padding-top: 0px;
+
+}
+
+#frame_right h1 {
+			font: bold 18pt tahoma;
+			margin:0px;
+}
+#frame_right h2 {
+		    font: bold 12pt tahoma;
+			text-decoration: underline;
+			margin:0px;
+}
+#frame_right h3 {
+		    font: normal 12pt tahoma;
+			margin:0px;
+}
+#frame_right p {
+			margin-top: 2px;
+			margin-bottom: 2px;
+}
+#contact h1 {
+			font: bold 18pt tahoma;
+			margin:0px;
+			text-align: right;
+			margin-right: 180px;
+}
+#contact h2 {
+		    font: bold 12pt tahoma;
+			text-decoration: underline;
+			margin:0px;
+			text-align: right;
+			margin-right: 180px;
+}
+#contact h3 {
+		    font: normal 12pt tahoma;
+			margin:0px;
+			text-align: right;
+			margin-right: 180px;
+
+}
+#contact p {
+			margin-top: 2px;
+			margin-bottom: 2px;
+			text-align: right;
+			margin-right: 180px;
+
+}
+
+#frame_right a:link, #frame_right a:visited, #frame_right a:active {
+			font: bold 10pt tahoma;
+			text-decoration: none;
+	  		color: rgb(81,110,202);
+}
+#frame_right a:hover {
+			background-color: rgb(81,110,202);
+			color: #ffffff;
+}
+/* ********************************************************* */
+
+#frame_bottom {
+			 clear: both;
+			 background-image: url(images/frame_bottom.gif);
+			 width: 800px;
+			 height: 44px;
+}
+
+/* ********************* Menu ****************************** */
+
+#menu {
+			 position: absolute;
+			 top: 132px;
+			 left: 32px; 
+			/left: 28px;
+			 margin:0;
+
+
+}
+#menu_line {
+			 position: absolute;
+			 top: 0px;
+			 left: -4px;
+			 /left: 0px;
+			 margin:0;
+			 width: 740px;
+			 border-top: #000000 3px solid;
+}
+
+#menu a:link, #menu a:visited, #menu a:active {
+	  		font: bold 14pt tahoma;
+	  		color: rgb(215,222,242);
+			text-decoration: none;
+
+			border-left: #000000 3px solid;
+			border-right: #000000 3px solid;
+
+}
+#menu a:hover {
+	  		color: rgb(81,110,202);
+			background-color: rgb(215,222,242);
+} 
+.menu_contacts{
+			padding-left: 27px;
+			padding-right: 26px;
+			margin-left: -7px;
+}
+.menu_calendar{
+			padding-left: 27px;
+			padding-right: 27px;
+			margin-left: -7px;
+}
+.menu_links{
+			padding-left: 27px;
+			padding-right: 27px;
+			/padding-right: 28px;
+			margin-left: -7px;
+}
+
+.menu_email{
+			padding-left: 27px;
+			padding-right: 27px;
+			/padding-right: 28px;
+			margin-left: -7px;
+}
+.menu_notes{
+			padding-left: 27px;
+			padding-right: 27px;
+			/padding-right: 28px;
+			margin-left: -7px;
+}
+.menu_upload{
+			padding-left: 27px;
+			padding-right: 27px;
+			/padding-right: 28px;
+			margin-left: -7px;
+}
+
+
+/* **************** Photos ********************************* */
+
+#personal_photo {
+		   background-image: url(images/photo_bg.gif);
+		   background-repeat:no-repeat;
+		   float: right;
+		   height: 150px;
+		   width: 150px;
+		   padding: 11px;
+} 
+#personal_photo_side {
+		   float: left;
+		   background-image: url(images/photo_bg_side.gif);
+		   background-repeat: no-repeat;
+		   height: 60px;
+		   width: 60px;
+		   padding: 10px;
+		   margin:0px;
+		   margin-right: -20px;
+}
+#personal_photo_side img {
+		   border: 0;
+		   margin:0px;
+}
+#side_photo {
+			height: 80px;
+}
+
+/* ********************************************************* */
+
+#addcontact {
+			float: left;
+			padding-right: 10px;
+			padding-left: 15px;
+}
+
+#groups {
+		margin-left: 20px;
+}
+#groups h2 {
+			font: bold 14pt tahoma;
+			text-decoration: underline;
+	  		color: rgb(81,110,202);
+			margin:0;
+
+}
+#groupname {
+}
+#groupname h3 {
+		   font: bold 14pt tahoma;
+		   text-align: left;
+		   text-decoration: underline;
+		   color: 000;
+		   margin-bottom: 5px;
+
+}
+
+#groupname a:link, #groupname a:visited, #groupname a:active {
+		   font: bold 10pt tahoma;
+		   float:right;
+		   margin-right: 200px;
+		   margin-top: -22px;
+   		   text-decoration: none;
+		   text-decoration: none;
+}
+#dellink {
+}
+#dellink a:link, #dellink a:visited, #dellinnk a:active {
+		 float: left;
+		 color: #000;
+		 font: bold 8pt tahoma;
+}
+#logobottom {
+			position: absolute;
+			top: 1px;
+			left: 385px;
+}
+#logobottom a:link, #logobottom a:visited, #logobottom a:active {
+		 color: #000;
+		 font: bold 10pt tahoma;
+		 text-decoration: none;
+}
+#logobottom a:hover {
+		color: rgb(0,0,195);
+}
+#lock {
+	  width:128px;
+	  height: 128px;
+	  background-image: url(images/lock.gif);
+}
+
+#day {
+	border: #000 1px solid;
+	background-color: #fff;
+	color: rgb(68,92,164);
+}
+#today {
+	border: #000 1px solid;
+	background-color: rgb(220,220,220); 
+	color: rgb(68,92,164);
+}
+#event a:link, #event a:visited, #event a:active {
+	text-decoration:underline;
+	background-color: tranparent;
+}
+#dayempty {
+	border: #000 0px solid;
+	background-color: transparent;
+	color: rgb(68,92,164);
+}

@@ -1,0 +1,17 @@
+#photos{
+    margin: auto;
+    padding-top: 5px;
+}
+
+#photos td {
+    padding: 3px 2px;
+    text-align: center;
+    vertical-align: middle;
+    width: 150px;
+}
+
+#photosTable img {
+    background: white none repeat scroll 0 0;
+    border: 1px solid #cccccc;
+    padding: 1px;
+}

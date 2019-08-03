@@ -1,0 +1,236 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color:#E1F7DF;
+	font-family: tahoma;
+	font-size: 12px;
+}
+.table_bgcolor{
+	background-color:#FFFFFF;
+}
+.heading {
+	font-family: tahoma;
+	font-size: 14px;
+	font-weight: normal;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.admin {
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color: #fefdfb;
+	text-decoration: none;
+}
+.wel {
+	font-family: tahoma;
+	font-size: 12px;
+	text-decoration: none;
+	font-weight: normal;
+}
+.narmal {
+	font-family: tahoma;
+	padding:2px;
+	font-size: 12px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #000000;
+}
+.narmaltext {
+	font-family: tahoma;
+	font-size:10px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #000000;
+}
+.drop_size{
+	width:40px;
+	height:15px;
+}
+#ttt {
+	border: 1px solid #00FF00;
+	height: 50px;
+	width: 100px;
+}
+
+.bgcolor_02{
+	background-color:#206017;
+	color:#fefdfb;
+	font-family: Tahoma;
+	font-size: 12px;
+	text-transform:uppercase;
+	font-weight:bold;
+}
+
+.bgtextcolor {
+	background-color:#EEFCFD;
+	color:#333333;
+	font-family: Tahoma;
+	font-size: 12px;
+	text-decoration: none;
+}
+.menutitle{
+	cursor:pointer;
+	margin-bottom: 5px;
+	color:#333333;
+	width:140px;
+	padding:2px;
+	text-align:left;
+	font-weight:bold;
+	font-family: Tahoma;
+	font-size: 12px;
+	text-decoration: none;
+}
+.menutitlein{
+	cursor:pointer;
+	margin-bottom: 5px;
+	color:#333333;
+	width:140px;
+	padding:2px;
+	text-align:left;
+	font-weight:normal;
+	font-family: Tahoma;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+.submenu{
+	margin-bottom: 0.5em;
+}
+.adminimage{
+	background-image:url(../images/1.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+}
+.header_01{
+	background-image:url(../../images/forestgreen_banner.jpg);
+	background-position:center;
+	background-repeat:no-repeat;
+	background-color:#206017;
+}
+.footer{
+	background-image:url(../images/line.jpg);
+	background-position:center;
+	background-repeat:no-repeat;
+}
+.star{
+	background-image:url(../images/star.jpg);
+	background-position:right;
+	background-repeat:no-repeat;
+}
+.backalter{
+	background-color:#DAF2F3;
+}
+.header_02{
+	background-image:url(../images/nav_bar1.jpg);
+	background-position:center;
+	background-repeat:no-repeat;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+.error_message{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-decoration:normal;
+	font-weight: bold;
+	color:#FF3333;
+}
+.message{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-decoration:normal;
+	font-weight: bold;
+	color:#990000;
+}
+.odd{
+	background-color:#FFFFFF;
+}
+.even{
+	background-color:#F5FDF4;
+}
+.success_message{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-size: 12px;
+	font-weight:bold;
+	text-decoration: none;
+	background-color: #3A302F;
+}
+.error_messages{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-size: 12px;	
+	text-decoration: none;
+	background-color: #A80928;
+}
+.tbl_grid{
+	border: 1px solid #206017;  
+	border-collapse:collapse;
+}
+.tb2_grid{
+	border: 2px solid #206017;  
+	
+}
+
+.header_012{
+	background-image:url(../images/home_pink.jpg);
+	background-position:center;
+	background-repeat:no-repeat;	
+}
+.schooltitle {
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+}
+.adminfont {
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color:  #333333;
+	text-decoration: none;
+}
+.admin:hover {
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color: #D9F4D5;
+	text-decoration: none;
+}
+.adminfont:hover {
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color:  #333333;
+	text-decoration: none;
+}
+.header02{
+	background-image:url(../../images/nav_bar1.jpg);
+	background-position:center;
+	background-repeat:no-repeat;
+}	
+.header_text{
+	font-family: tahoma;
+	font-size: 11px;
+	font-weight: bold;
+	color:  #ffffff;
+	text-decoration: none;
+}

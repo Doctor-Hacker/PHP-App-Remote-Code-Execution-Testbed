@@ -1,0 +1,1548 @@
+<?php
+sm_registerglobal('pid','action','update','emsg','start','submit_from','redirecturl','sno1','date','student_name','father_name','mother_name','class_name','section','exam_name','exam_date','rollnumber','marks_obtained','rank','dob','charector','status','created_on','conduct','games','hobbies','id','update','gender','es_preadmissionid','es_classesid','exam_date','year_btn','academicyear','select_group','fee','subject');
+/**
+* Only Admin users can view the pages
+*/
+
+if (!isset($_SESSION['eschools']['admin_user']) || $_SESSION['eschools']['admin_user']=="" ) {
+	//header('location: ./?pid=1&unauth=0');
+	//exit;
+}
+$exesqlquery = "SELECT * FROM `es_groups`";
+	$getgrplist = getamultiassoc($exesqlquery);
+
+	$school_details_sel = "SELECT * FROM `es_finance_master` ORDER BY `es_finance_masterid` DESC";
+$school_details_res = getamultiassoc($school_details_sel);
+
+$html_obj = new html_form();
+$vlc = new FormValidation();
+$default_title_array=array
+('Male'=>'Male','Female'=>'Female');	
+$obj_classlist    = new es_classes();
+
+$html_obj = new html_form();
+
+$obj_classlistarr = $obj_classlist->GetList(array(array("es_classesid", ">", 0)) );
+//$class_list[''] = "-- All --";
+foreach($obj_classlistarr as $eachclass){
+$class_list[$eachclass->es_classesId]= $eachclass->es_classname;
+}
+//array_print($class_list);
+//$students_list=array(""=>"Select Student");
+
+
+
+			if(isset($es_classesid) && $es_classesid!='') {
+				if($es_classesid=='all'){
+		 $sel_stds = "SELECT es_preadmissionid , pre_name , pre_emailid ,pre_dateofbirth, pre_student_username  FROM es_preadmission  WHERE  pre_status!= 'inactive' AND status !='inactive'   ";
+				$allstudents = $db->getRows($sel_stds);
+				
+				if(count($allstudents)>0){
+		foreach($allstudents as $each_student){
+		$students_list[$each_student['es_preadmissionid']]= $each_student['pre_name']. '&nbsp;&lt;'.$each_student['pre_student_username'].'&gt;';
+		//array_print($students_list);
+		}
+		}
+				}else{
+				$sel_stds = "SELECT es_preadmissionid , pre_name , pre_emailid ,pre_dateofbirth, pre_student_username FROM es_preadmission  WHERE pre_class='".$es_classesid."' AND pre_status!= 'inactive' AND status !='inactive'  ";
+				$allstudents = $db->getRows($sel_stds);
+				if(count($allstudents)>0){
+		foreach($allstudents as $each_student){
+		$students_list[$each_student['es_preadmissionid']]= $each_student['pre_name']. '&nbsp;';
+	
+	//	array_print($students_list);
+		}
+		}
+				
+				}}
+				
+	
+if(isset($es_classesid) && $es_classesid!='' && isset($es_preadmissionid) && $es_preadmissionid!='' && !isset($submit_from))
+{
+$student_det=$db->getRow("SELECT * FROM es_preadmission WHERE es_preadmissionid='".$es_preadmissionid."'");
+
+$student_det2=$db->getRow("SELECT * FROM subjects_cat WHERE classid='".$student_det['pre_class']."'");
+
+
+$student_id=$student_det['es_preadmissionid'];
+ $student_name=$student_det['pre_name'];
+$gender=$student_det['pre_gender'];
+  $dob= func_date_conversion("Y-m-d","d/m/Y",$student_det['pre_dateofbirth']);
+$father_name=$student_det['pre_fathername'];
+$mother_name=$student_det['pre_mothername'];
+$section=$student_det2['scat_name'];
+
+ $sec=$db->getRow("select ES.* FROM es_sections_student ESS,es_sections ES ,es_preadmission EP WHERE ES.section_id=ESS.section_id AND EP.es_preadmissionid=ESS.student_id AND ESS.course_id=EP.pre_class AND ESS.student_id=".$es_preadmissionid); 
+ ("select ES.* FROM es_sections_student ESS,es_sections ES ,es_preadmission EP WHERE ES.section_id=ESS.section_id AND EP.es_preadmissionid=ESS.student_id AND ESS.course_id=EP.pre_class AND ESS.student_id=".$es_preadmissionid); 
+ $section=$sec['section_name'];
+ $sec1=$db->getRow("select * from es_sections_student where student_id=".$es_preadmissionid);
+//array_print($sec1);
+ $rollnumber=$sec1['roll_no'];
+
+
+
+}
+				
+	
+	
+	if($action=='list'){
+
+		$sql_qr = "SELECT * FROM es_charcerti where status !='Deleted' ";
+		$no_rec = sqlnumber($sql_qr);
+		$q= "SELECT * FROM es_preadmission where status !='Deleted' ";
+		$no_recs = sqlnumber($q);
+		if(!isset($start)){$start=0;}
+		$q_limit = 20;
+		$sql_qr .=" ORDER BY id  DESC LIMIT ".$start.",".$q_limit."";
+		$all_sem_det = $db->getrows($sql_qr);
+
+}
+if($action=="deletecerti"){
+
+$db->update("es_charcerti","status='Deleted'",'id='.$id );
+	header("location:?pid=95&action=list&emsg=3");
+	}
+
+
+	
+	
+if($action=='holilist'){
+
+		$sql_qr = "SELECT * FROM es_holidaynoti where status !='Deleted' ";
+		$no_rec = sqlnumber($sql_qr);
+		$q= "SELECT * FROM es_preadmission where status !='Deleted' ";
+		$no_recs = sqlnumber($q);
+		if(!isset($start)){$start=0;}
+		$q_limit = 20;
+		$sql_qr .=" ORDER BY id  DESC LIMIT ".$start.",".$q_limit."";
+		$all_sem_det = $db->getrows($sql_qr);
+
+}
+if($action=="deleteholi"){
+
+$db->update("es_holidaynoti","status='Deleted'",'id='.$id );
+	header("location:?pid=95&action=holilist&emsg=3");
+	}
+	
+	
+	
+	if($action=='holiadd'){
+
+$sno=$sno+1;
+if(isset($submit_from) && $submit_from!="" ){
+  //array_print($_POST);
+
+if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Branch";}
+   //if($hobbies==''){ $errormessage['hobbies'] = "Select  Class";}
+    if($es_preadmissionid==''){ $errormessage['es_preadmissionid'] = "Select Student ID";}
+		else{ 
+		
+	 $count="select count(*) from  es_holidaynoti where   sno='".$es_preadmissionid."' and status !='Deleted' ";
+$c =$db->getOne($count);
+  if($c!=0){$errormessage['student_name']  = " Bonafied Certificate already issued to this student";}
+
+	//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		//$count=getdata('es_bonafiedbank','count(student_name)','student_name="'.$student_name.'  " ');
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+  }
+	
+	    //if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+		//else{ 
+		
+	 $count="select count(*) from  es_holidaynoti where   student_name='".$es_preadmissionid."' and status !='Deleted' ";
+$c =$db->getOne($count);
+  if($c!=0){$errormessage['student_name']  = "Student Name Has Already Issued The Bonafied Certificate";}
+
+	//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		//$count=getdata('es_bonafiedbank','count(student_name)','student_name="'.$student_name.'  " ');
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+  //}
+  
+
+ // if($gender==''){ $errormessage['gender'] = "Select Gender";}
+		//if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+		//if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+	
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+		//if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+		 //if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+	//if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}
+		//if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+	
+		
+		 //if($rank==''){ $errormessage['rank'] = "Enter Division";}
+		//if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+				
+	/*	if(isset($email) && $email!=""){
+				if(!$vlc->is_email($email)){$errormessage['email'] = "Enter Valid Email";}
+		}
+	*/		 
+	
+		if(count($errormessage)==0){
+		$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+	                      $message_arr = array( 
+						  "sno" =>$es_preadmissionid,	
+						  "date"  =>$date,							  
+						  "student_name"  =>$student_name,						  
+						  "father_name"  =>$father_name,	
+						  "mother_name"     =>$mother_name,	
+						  "class_name"    =>$es_classesid,
+						  "section"     =>$section,						  
+						   "gender"     =>$gender,
+						  "exam_name" =>$exam_name,	
+						  "exam_date"  =>$exam_date,	
+						  "roll_number"  =>$rollnumber,	
+						  "marks_obtained"  =>$marks_obtained,	
+						  "rank"     =>$rank,	
+						  "dob"    =>$dob,
+						  "section"     =>$section,
+						  
+						    "charector"  =>$charector,	
+						  "conduct"     =>$conduct,	
+						  "games"    =>$games,
+						  "hobbies"     =>$hobbies,
+						  "created_on" =>date("Y-m-d"),
+					       );
+					  $db->insert("es_holidaynoti",$message_arr);
+					  header("location:?pid=95&action=holilist&emsg=1");
+       }
+    }
+}
+	
+	
+	
+	if($action=='holiedit'){
+
+	$sem_det = $db->getrow("SELECT * FROM es_holidaynoti WHERE id=".$id);
+		if(isset($update) && $update!=""){
+		if(isset($update) && $update!=""){
+		//	  if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+		//if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+		//if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+	// if($class_name==''){ $errormessage['class_name'] = "Enter Class name";}
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+		//if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+		 //if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+		//if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}
+		//if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+		//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+  // if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Branch";}
+   if($hobbies==''){ $errormessage['hobbies'] = "Select  Class";}
+		 //if($rank==''){ $errormessage['rank'] = "Enter Division";}
+		//if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+		    }
+			$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+			if(count($errormessage)==0){
+			//	$db->update("es_bonafied","sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',hobbies='".$hobbies."'	,exam_name='".$exam_name."'","sno=".$id);
+				
+				
+				$query="update es_holidaynoti set sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',hobbies='".$hobbies."'	,exam_name='".$exam_name."' where id=".$id;
+				
+				mysql_query($query);
+				header("location:?pid=143&action=holilist&emsg=2");
+				exit;
+			}
+		
+		
+	
+		}
+		$sno1 = $sem_det['sno'];
+		$student_name = $sem_det['student_name'];
+		$father_name  = $sem_det['father_name'];
+		$mother_name = $sem_det['mother_name'];
+		//$class_name  = $sem_det['class_name'];
+		 $section  = $sem_det['section'];
+		$exam_date  = $sem_det['exam_date'];
+		
+		$rollnumber = $sem_det['roll_number'];
+		$marks_obtained = $sem_det['marks_obtained'];
+		$rank  = $sem_det['rank'];
+		 $dob= func_date_conversion("Y-m-d","d/m/Y",$sem_det['dob']);
+		$charector  = $sem_det['charector'];
+		$conduct  = $sem_det['conduct'];
+		$games  = $sem_det['games'];
+		$hobbies  = $sem_det['hobbies'];
+		$exam_name  = $sem_det['exam_name'];
+		$gender  = $sem_det['gender'];
+		
+}
+
+
+if($action=='print_holidaynoti'){
+	$candidate_det_01 = $db->getrow("SELECT * FROM es_holidaynoti WHERE id=".$id);
+								if(is_array($candidate_det_01)){
+									foreach($candidate_det_01 as $k=>$v){
+										if($v==""){$v=" --- ";}
+										$candidate_det[$k]=$v;
+										
+
+//array_print($candidate_det);
+									}
+									}
+								//array_print($candidate_det);
+
+
+}
+
+
+if($action=='eligibilitylist'){
+
+		$sql_qr = "SELECT * FROM es_eligibilitycerti where status !='Deleted' ";
+		$no_rec = sqlnumber($sql_qr);
+		$q= "SELECT * FROM es_preadmission where status !='Deleted' ";
+		$no_recs = sqlnumber($q);
+		if(!isset($start)){$start=0;}
+		$q_limit = 20;
+		$sql_qr .=" ORDER BY id  DESC LIMIT ".$start.",".$q_limit."";
+		$all_sem_det = $db->getrows($sql_qr);
+
+}
+if($action=="deleteeligibility"){
+	
+$db->update("es_eligibilitycerti","status='Deleted'",'id='.$id );
+	header("location:?pid=95&action=eligibilitylist&emsg=3");
+	}
+
+
+
+if($action=='eligiblityedit'){
+
+	$sem_det = $db->getrow("SELECT * FROM es_eligibilitycerti WHERE id=".$id);
+		if(isset($update) && $update!=""){
+		if(isset($update) && $update!=""){
+		//	  if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+		//if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+		//if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+	// if($class_name==''){ $errormessage['class_name'] = "Enter Class name";}
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+		//if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+		 //if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+		//if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}
+		//if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+		//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+  // if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Branch";}
+   //if($hobbies==''){ $errormessage['hobbies'] = "Select  Class";}
+		 //if($rank==''){ $errormessage['rank'] = "Enter Division";}
+		//if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+		    }
+			$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+			if(count($errormessage)==0){
+			//	$db->update("es_bonafied","sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',hobbies='".$hobbies."'	,exam_name='".$exam_name."'","sno=".$id);
+				
+				
+				 $query="update es_eligibilitycerti set sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',hobbies='".$hobbies."',city='".$city."',state='".$state."',exam_name='".$exam_name."' where id=".$id;
+				
+				mysql_query($query);
+				header("location:?pid=95&action=eligibilitylist&emsg=2");
+				exit;
+			}
+		
+		
+	
+		}
+		$sno1 = $sem_det['sno'];
+		$student_name = $sem_det['student_name'];
+		$father_name  = $sem_det['father_name'];
+		$mother_name = $sem_det['mother_name'];
+		//$class_name  = $sem_det['class_name'];
+		 $section  = $sem_det['section'];
+		$exam_date  = $sem_det['exam_date'];
+		
+		$rollnumber = $sem_det['roll_number'];
+		$marks_obtained = $sem_det['marks_obtained'];
+		$rank  = $sem_det['rank'];
+		 $dob= func_date_conversion("Y-m-d","d/m/Y",$sem_det['dob']);
+		$charector  = $sem_det['charector'];
+		$conduct  = $sem_det['conduct'];
+		$games  = $sem_det['games'];
+		$hobbies  = $sem_det['hobbies'];
+		$city  = $sem_det['city'];
+		$state  = $sem_det['state'];
+		$exam_name  = $sem_det['exam_name'];
+		$gender  = $sem_det['gender'];
+		
+}
+
+	
+if($action=='eligiblityadd'){
+
+$sno=$sno+1;
+if(isset($submit_from) && $submit_from!="" ){
+  //array_print($_POST);
+
+//if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Branch";}
+   //if($hobbies==''){ $errormessage['hobbies'] = "Select  Class";}
+    if($es_preadmissionid==''){ $errormessage['es_preadmissionid'] = "Select Student ID";}
+		else{ 
+		
+	 $count="select count(*) from  es_eligibilitycerti where   sno='".$es_preadmissionid."' and status !='Deleted' ";
+$c =$db->getOne($count);
+  if($c!=0){$errormessage['student_name']  = " Attempt Certificate already issued to this student";}
+
+	//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		//$count=getdata('es_bonafiedbank','count(student_name)','student_name="'.$student_name.'  " ');
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+  }
+	
+	    //if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+		//else{ 
+		
+	 $count="select count(*) from  es_eligibilitycerti where   student_name='".$es_preadmissionid."' and status !='Deleted' ";
+$c =$db->getOne($count);
+  if($c!=0){$errormessage['student_name']  = "Student Name Has Already Issued The Bonafied Certificate";}
+
+	//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		//$count=getdata('es_bonafiedbank','count(student_name)','student_name="'.$student_name.'  " ');
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+  
+  
+
+ // if($gender==''){ $errormessage['gender'] = "Select Gender";}
+		//if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+		//if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+	
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+		//if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+		 //if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+	//if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}
+		//if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+	
+		
+		 //if($rank==''){ $errormessage['rank'] = "Enter Division";}
+		//if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+				
+	/*	if(isset($email) && $email!=""){
+				if(!$vlc->is_email($email)){$errormessage['email'] = "Enter Valid Email";}
+		}
+	*/		 
+	
+		if(count($errormessage)==0){
+		$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+	                      $message_arr = array( 
+						  "sno" =>$es_preadmissionid,	
+						  "date"  =>$date,							  
+						  "student_name"  =>$student_name,						  
+						  "father_name"  =>$father_name,	
+						  "mother_name"     =>$mother_name,	
+						  "class_name"    =>$es_classesid,
+						  "section"     =>$section,						  
+						   "gender"     =>$gender,
+						  "exam_name" =>$exam_name,	
+						  "exam_date"  =>$exam_date,	
+						  "roll_number"  =>$rollnumber,	
+						  "marks_obtained"  =>$marks_obtained,	
+						  "rank"     =>$rank,	
+						  "dob"    =>$dob,
+						  "section"     =>$section,
+						  "city"     =>$city,
+						  "state"     =>$state,
+						  
+						    "charector"  =>$charector,	
+						  "conduct"     =>$conduct,	
+						  "games"    =>$games,
+						  "hobbies"     =>$hobbies,
+						  "created_on" =>date("Y-m-d"),
+					       );
+					  $db->insert("es_eligibilitycerti",$message_arr);
+					  header("location:?pid=95&action=eligibilitylist&emsg=1");
+       }
+    }
+}
+	
+	if($action=='print_eligibilitycerti'){
+	$candidate_det_01 = $db->getrow("SELECT * FROM es_eligibilitycerti WHERE id=".$id);
+								if(is_array($candidate_det_01)){
+									foreach($candidate_det_01 as $k=>$v){
+										if($v==""){$v=" --- ";}
+										$candidate_det[$k]=$v;
+										
+
+//array_print($candidate_det);
+									}
+									}
+								//array_print($candidate_det);
+
+
+}
+
+				
+if($action=='attemptlist'){
+
+		$sql_qr = "SELECT * FROM es_attemptcerti where status !='Deleted' ";
+		$no_rec = sqlnumber($sql_qr);
+		$q= "SELECT * FROM es_preadmission where status !='Deleted' ";
+		$no_recs = sqlnumber($q);
+		if(!isset($start)){$start=0;}
+		$q_limit = 20;
+		$sql_qr .=" ORDER BY id  DESC LIMIT ".$start.",".$q_limit."";
+		$all_sem_det = $db->getrows($sql_qr);
+
+}
+if($action=="deleteattempt"){
+	
+$db->update("es_attemptcerti","status='Deleted'",'id='.$id );
+	header("location:?pid=95&action=attemptlist&emsg=3");
+	}
+
+
+if($action=='feelist'){
+
+
+
+		$sql_qr = "SELECT * FROM es_feesnotice where status !='Deleted' ";
+
+		$no_rec = sqlnumber($sql_qr);
+
+		$q= "SELECT * FROM es_preadmission where status !='Deleted' ";
+
+		$no_recs = sqlnumber($q);
+
+		if(!isset($start)){$start=0;}
+
+		$q_limit = 20;
+
+		$sql_qr .=" ORDER BY id  DESC LIMIT ".$start.",".$q_limit."";
+
+		$all_sem_det = $db->getrows($sql_qr);
+
+
+
+}
+
+if($action=="deletefee"){
+
+
+
+$db->update("es_feesnotice","status='Deleted'",'id='.$id );
+
+	header("location:?pid=95&action=feelist&emsg=3");
+
+	}
+
+
+if($action=='attemptadd'){
+
+$sno=$sno+1;
+if(isset($submit_from) && $submit_from!="" ){
+  //array_print($_POST);
+
+if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Branch";}
+   //if($hobbies==''){ $errormessage['hobbies'] = "Select  Class";}
+    if($es_preadmissionid==''){ $errormessage['es_preadmissionid'] = "Select Student ID";}
+		else{ 
+		
+	 $count="select count(*) from  es_attemptcerti where   sno='".$es_preadmissionid."' and status !='Deleted' ";
+$c =$db->getOne($count);
+  if($c!=0){$errormessage['student_name']  = " Attempt Certificate already issued to this student";}
+
+	//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		//$count=getdata('es_bonafiedbank','count(student_name)','student_name="'.$student_name.'  " ');
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+  }
+	
+	    if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+		else{ 
+		
+	 $count="select count(*) from  es_attemptcerti where   student_name='".$es_preadmissionid."' and status !='Deleted' ";
+$c =$db->getOne($count);
+  if($c!=0){$errormessage['student_name']  = "Student Name Has Already Issued The Bonafied Certificate";}
+
+	//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		//$count=getdata('es_bonafiedbank','count(student_name)','student_name="'.$student_name.'  " ');
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+  }
+  
+
+ // if($gender==''){ $errormessage['gender'] = "Select Gender";}
+		if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+		//if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+	
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+		//if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+		 //if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+	//if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}
+		//if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+	
+		
+		 //if($rank==''){ $errormessage['rank'] = "Enter Division";}
+		//if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+				
+	/*	if(isset($email) && $email!=""){
+				if(!$vlc->is_email($email)){$errormessage['email'] = "Enter Valid Email";}
+		}
+	*/		 
+	
+		if(count($errormessage)==0){
+		$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+	                      $message_arr = array( 
+						  "sno" =>$es_preadmissionid,	
+						  "date"  =>$date,							  
+						  "student_name"  =>$student_name,						  
+						  "father_name"  =>$father_name,	
+						  "mother_name"     =>$mother_name,	
+						  "class_name"    =>$es_classesid,
+						  "section"     =>$section,						  
+						   "gender"     =>$gender,
+						  "exam_name" =>$exam_name,	
+						  "exam_date"  =>$exam_date,	
+						  "roll_number"  =>$rollnumber,	
+						  "marks_obtained"  =>$marks_obtained,	
+						  "rank"     =>$rank,	
+						  "dob"    =>$dob,
+						  "section"     =>$section,
+						 
+						  
+						    "charector"  =>$charector,	
+						  "conduct"     =>$conduct,	
+						  "games"    =>$games,
+						  "hobbies"     =>$hobbies,
+						  "created_on" =>date("Y-m-d"),
+					       );
+					  $db->insert("es_attemptcerti",$message_arr);
+					  header("location:?pid=95&action=attemptlist&emsg=1");
+       }
+    }
+}
+
+
+if($action=='feeadd'){
+
+
+
+$sno=$sno+1;
+
+if(isset($submit_from) && $submit_from!="" ){
+
+  //array_print($_POST);
+
+
+
+if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Branch";}
+
+  // if($hobbies==''){ $errormessage['hobbies'] = "Select  Class";}
+
+    if($es_preadmissionid==''){ $errormessage['es_preadmissionid'] = "Select Student ID";}
+
+		else{ 
+
+		
+
+	 $count="select count(*) from es_feesnotice where   sno='".$es_preadmissionid."' and status !='Deleted' ";
+
+$c =$db->getOne($count);
+
+  if($c!=0){$errormessage['student_name']  = " Attempt Certificate already issued to this student";}
+
+
+
+	//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+
+		//$count=getdata('es_bonafiedbank','count(student_name)','student_name="'.$student_name.'  " ');
+
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+
+  }
+
+	
+
+	    if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+
+		else{ 
+
+		
+
+	 $count="select count(*) from es_feesnotice where   student_name='".$es_preadmissionid."' and status !='Deleted' ";
+
+$c =$db->getOne($count);
+
+  if($c!=0){$errormessage['student_name']  = "Student Name Has Already Issued The Bonafied Certificate";}
+
+
+
+	//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+
+		//$count=getdata('es_bonafiedbank','count(student_name)','student_name="'.$student_name.'  " ');
+
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+
+  }
+
+  
+
+
+
+ // if($gender==''){ $errormessage['gender'] = "Select Gender";}
+
+		//if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+
+		//if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+
+	
+
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+
+		//if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+
+		 //if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+
+	//if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}
+
+		//if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+
+	
+
+		
+
+		 //if($rank==''){ $errormessage['rank'] = "Enter Division";}
+
+		//if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+
+				
+
+	/*	if(isset($email) && $email!=""){
+
+				if(!$vlc->is_email($email)){$errormessage['email'] = "Enter Valid Email";}
+
+		}
+
+	*/		 
+
+	
+
+		if(count($errormessage)==0){
+
+		$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+
+	                      $message_arr = array( 
+
+						  "sno" =>$es_preadmissionid,	
+
+						  "date"  =>$date,							  
+
+						  "student_name"  =>$student_name,						  
+
+						  "father_name"  =>$father_name,	
+
+						  "mother_name"     =>$mother_name,	
+
+						  "class_name"    =>$es_classesid,
+
+						  "section"     =>$section,						  
+
+						   "gender"     =>$gender,
+
+						  "exam_name" =>$exam_name,	
+
+						  "exam_date"  =>$exam_date,	
+
+						  "roll_number"  =>$rollnumber,	
+
+						  "marks_obtained"  =>$marks_obtained,	
+
+						  "rank"     =>$rank,	
+
+						  "dob"    =>$dob,
+
+						  "section"     =>$section,
+
+						  "state"     =>$state,
+
+						  "fee"     =>$fee,
+
+						  "charector"  =>$charector,	
+
+						  "conduct"     =>$conduct,	
+
+						  "city"     =>$city,
+						  	
+						  "subject"     =>$subject,
+
+						  "games"    =>$games,
+
+						  "hobbies"     =>$hobbies,
+
+						  "created_on" =>date("Y-m-d"),
+
+					       );
+
+					  $db->insert("es_feesnotice",$message_arr);
+
+					  header("location:?pid=95&action=feelist&emsg=1");
+
+       }
+
+    }
+
+}
+
+
+
+if($action=='undertakingadd'){
+
+$sno=$sno+1;
+if(isset($submit_from) && $submit_from!="" ){
+  //array_print($_POST);
+
+if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Branch";}
+   
+    if($es_preadmissionid==''){ $errormessage['es_preadmissionid'] = "Select Student ID";}
+		else{ 
+		
+	 $count="select count(*) from  es_undertaking where   sno='".$es_preadmissionid."' and status !='Deleted' ";
+$c =$db->getOne($count);
+  if($c!=0){$errormessage['student_name']  = " Bonafied Certificate already issued to this student";}
+
+	//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		//$count=getdata('es_bonafiedbank','count(student_name)','student_name="'.$student_name.'  " ');
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+  }
+	
+	    if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+		else{ 
+		
+	 $count="select count(*) from  es_undertaking where   student_name='".$es_preadmissionid."' and status !='Deleted' ";
+$c =$db->getOne($count);
+  if($c!=0){$errormessage['student_name']  = "Student Name Has Already Issued The Bonafied Certificate";}
+
+	//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		//$count=getdata('es_bonafiedbank','count(student_name)','student_name="'.$student_name.'  " ');
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+  }
+  
+
+ // if($gender==''){ $errormessage['gender'] = "Select Gender";}
+		if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+		//if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+	
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+		//if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+		// if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+	//if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}
+		//if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+	
+		
+		 //if($rank==''){ $errormessage['rank'] = "Enter Division";}
+		//if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+				
+	/*	if(isset($email) && $email!=""){
+				if(!$vlc->is_email($email)){$errormessage['email'] = "Enter Valid Email";}
+		}
+	*/		 
+	
+		if(count($errormessage)==0){
+		$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+	                      $message_arr = array( 
+						  "sno" =>$es_preadmissionid,	
+						  //"date"  =>$date,							  
+						  "student_name"  =>$student_name,						  
+						  "father_name"  =>$father_name,	
+						  "mother_name"     =>$mother_name,	
+						  "class_name"    =>$es_classesid,
+						  "section"     =>$section,	
+						  //"exam_date"	=>$exam_date,				  
+						   //"gender"     =>$gender,
+						 
+						  "section"     =>$section,
+						  "hobbies"     =>$hobbies,
+						  
+						  
+						 
+						 
+						  "created_on" =>date("Y-m-d"),
+					       );
+					  $db->insert("es_undertaking",$message_arr);
+					  header("location:?pid=95&action=undertakinglist&emsg=1");
+       }
+    }
+}
+
+
+
+
+
+if($action=='add'){
+
+$sno=$sno+1;
+if(isset($submit_from) && $submit_from!="" ){
+  //array_print($_POST);
+
+   if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Class";}
+   
+    if($es_preadmissionid==''){ $errormessage['es_preadmissionid'] = "Select Student ID";}
+		else{ 
+		
+	 $count="select count(*) from  es_charcerti where   sno='".$es_preadmissionid."' and status !='Deleted' ";
+$c =$db->getOne($count);
+  if($c!=0){$errormessage['student_name']  = " Character Certificate already issued to this student";}
+
+	if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		//$count=getdata('es_charcerti','count(student_name)','student_name="'.$student_name.'  " ');
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+  }
+	
+	    if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+		else{ 
+		
+	 $count="select count(*) from  es_charcerti where   student_name='".$es_preadmissionid."' and status !='Deleted' ";
+$c =$db->getOne($count);
+  if($c!=0){$errormessage['student_name']  = "Student Name Has Already Issued The Charecter Certificate";}
+
+	if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		//$count=getdata('es_charcerti','count(student_name)','student_name="'.$student_name.'  " ');
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+  }
+  
+
+  if($gender==''){ $errormessage['gender'] = "Select Gender";}
+		if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+		if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+	
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+		if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+		 if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+	/*if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}*/
+		if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+	
+		
+		 if($rank==''){ $errormessage['rank'] = "Enter Division";}
+		if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+				
+	/*	if(isset($email) && $email!=""){
+				if(!$vlc->is_email($email)){$errormessage['email'] = "Enter Valid Email";}
+		}
+	*/		 
+	
+		if(count($errormessage)==0){
+		$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+	                      $message_arr = array( 
+						  "sno" =>$es_preadmissionid,	
+						  "date"  =>$date,							  
+						  "student_name"  =>$student_name,						  
+						  "father_name"  =>$father_name,	
+						  "mother_name"     =>$mother_name,	
+						  "class_name"    =>$es_classesid,
+						  "section"     =>$section,						  
+						   "gender"     =>$gender,
+						  "exam_name" =>$exam_name,	
+						  "exam_date"  =>$exam_date,	
+						  "roll_number"  =>$rollnumber,	
+						  "marks_obtained"  =>$marks_obtained,	
+						  "rank"     =>$rank,	
+						  "dob"    =>$dob,
+						  "section"     =>$section,
+						  
+						    "charector"  =>$charector,	
+						  "conduct"     =>$conduct,	
+						  "games"    =>$games,
+						  "hobbies"     =>$hobbies,
+						  "created_on" =>date("Y-m-d"),
+					       );
+					  $db->insert("es_charcerti",$message_arr);
+					  header("location:?pid=95&action=list&emsg=1");
+       }
+    }
+}
+
+if($action=='undertakinglist'){
+
+		$sql_qr = "SELECT * FROM es_undertaking where status !='Deleted' ";
+		$no_rec = sqlnumber($sql_qr);
+		$q= "SELECT * FROM es_preadmission where status !='Deleted' ";
+		$no_recs = sqlnumber($q);
+		if(!isset($start)){$start=0;}
+		$q_limit = 20;
+		$sql_qr .=" ORDER BY id  DESC LIMIT ".$start.",".$q_limit."";
+		$all_sem_det = $db->getrows($sql_qr);
+
+}
+
+if($action=="deleteundertaking"){
+
+
+
+$db->update("es_undertaking","status='Deleted'",'id='.$id );
+
+	header("location:?pid=95&action=undertakinglist&emsg=3");
+
+	}
+
+if($action=='undertakingedit'){
+
+	$sem_det = $db->getrow("SELECT * FROM es_undertaking WHERE id=".$id);
+		if(isset($update) && $update!=""){
+		if(isset($update) && $update!=""){
+		//	  if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+		if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+		//if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+	// if($class_name==''){ $errormessage['class_name'] = "Enter Class name";}
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+		//if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+		 //if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+		//if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}
+		//if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+		//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+  // if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Branch";}
+   //if($hobbies==''){ $errormessage['hobbies'] = "Select  Class";}
+		 //if($rank==''){ $errormessage['rank'] = "Enter Division";}
+		//if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+		    }
+			$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+			if(count($errormessage)==0){
+			//	$db->update("es_undertaking","sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',hobbies='".$hobbies."'	,exam_name='".$exam_name."'","sno=".$id);
+				
+				
+				 $query="update es_undertaking set sno='".$sno1."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."' where id=".$id;
+				
+				mysql_query($query);
+				header("location:?pid=95&action=undertakinglist&emsg=2");
+				exit;
+			}
+		
+		
+	
+		}
+		$sno1 = $sem_det['sno'];
+		$student_name = $sem_det['student_name'];
+		$father_name  = $sem_det['father_name'];
+		$mother_name = $sem_det['mother_name'];
+		//$class_name  = $sem_det['class_name'];
+		 $section  = $sem_det['section'];
+		 $standard = $sem_det['hobbies'];
+		
+		 $dob= func_date_conversion("Y-m-d","d/m/Y",$sem_det['dob']);
+		
+		
+		
+		
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if($action=='print_udertaking'){
+	$candidate_det_01 = $db->getrow("SELECT * FROM es_undertaking WHERE id=".$id);
+								if(is_array($candidate_det_01)){
+									foreach($candidate_det_01 as $k=>$v){
+										if($v==""){$v=" --- ";}
+										$candidate_det[$k]=$v;
+										
+
+//array_print($candidate_det);
+									}
+									}
+								//array_print($candidate_det);
+
+
+}
+
+
+
+
+if($action=='attemptedit'){
+
+	$sem_det = $db->getrow("SELECT * FROM es_attemptcerti WHERE id=".$id);
+		if(isset($update) && $update!=""){
+		if(isset($update) && $update!=""){
+		//	  if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+		if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+		//if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+	// if($class_name==''){ $errormessage['class_name'] = "Enter Class name";}
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+		//if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+		 //if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+		//if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}
+		//if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+		//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+  // if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Branch";}
+   if($hobbies==''){ $errormessage['hobbies'] = "Select  Class";}
+		 //if($rank==''){ $errormessage['rank'] = "Enter Division";}
+		//if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+		    }
+			$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+			if(count($errormessage)==0){
+			//	$db->update("es_bonafied","sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',hobbies='".$hobbies."'	,exam_name='".$exam_name."'","sno=".$id);
+				
+				
+				 $query="update es_attemptcerti set sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',hobbies='".$hobbies."'	,exam_name='".$exam_name."' where id=".$id;
+				
+				mysql_query($query);
+				header("location:?pid=95&action=attemptlist&emsg=2");
+				exit;
+			}
+		
+		
+	
+		}
+		$sno1 = $sem_det['sno'];
+		$student_name = $sem_det['student_name'];
+		$father_name  = $sem_det['father_name'];
+		$mother_name = $sem_det['mother_name'];
+		//$class_name  = $sem_det['class_name'];
+		 $section  = $sem_det['section'];
+		$exam_date  = $sem_det['exam_date'];
+		
+		$rollnumber = $sem_det['roll_number'];
+		$marks_obtained = $sem_det['marks_obtained'];
+		$rank  = $sem_det['rank'];
+		 $dob= func_date_conversion("Y-m-d","d/m/Y",$sem_det['dob']);
+		$charector  = $sem_det['charector'];
+		$conduct  = $sem_det['conduct'];
+		$games  = $sem_det['games'];
+		$hobbies  = $sem_det['hobbies'];
+		$exam_name  = $sem_det['exam_name'];
+		$gender  = $sem_det['gender'];
+		
+}
+
+
+
+if($action=='edit'){
+
+	$sem_det = $db->getrow("SELECT * FROM es_charcerti WHERE id=".$id);
+		if(isset($update) && $update!=""){
+		if(isset($update) && $update!=""){
+		//	  if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+		if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+		if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+	// if($class_name==''){ $errormessage['class_name'] = "Enter Class name";}
+		//if($section==''){ $errormessage['section'] = "Enter Class Section";}
+		if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+		 if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+		/*if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}*/
+		if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+		if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		
+		 if($rank==''){ $errormessage['rank'] = "Enter Division";}
+		if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+		    }
+			$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+			if(count($errormessage)==0){
+			//	$db->update("es_charcerti","sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',hobbies='".$hobbies."'	,exam_name='".$exam_name."'","sno=".$id);
+				
+				
+				 $query="update es_charcerti set sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',hobbies='".$hobbies."'	,exam_name='".$exam_name."' where id=".$id;
+				
+				mysql_query($query);
+				header("location:?pid=95&action=list&emsg=2");
+				exit;
+			}
+		
+		
+	
+		}
+		$sno1 = $sem_det['sno'];
+		$student_name = $sem_det['student_name'];
+		$father_name  = $sem_det['father_name'];
+		$mother_name = $sem_det['mother_name'];
+		//$class_name  = $sem_det['class_name'];
+		 $section  = $sem_det['section'];
+		$exam_date  = $sem_det['exam_date'];
+		
+		$rollnumber = $sem_det['roll_number'];
+		$marks_obtained = $sem_det['marks_obtained'];
+		$rank  = $sem_det['rank'];
+		 $dob= func_date_conversion("Y-m-d","d/m/Y",$sem_det['dob']);
+		$charector  = $sem_det['charector'];
+		$conduct  = $sem_det['conduct'];
+		$games  = $sem_det['games'];
+		$hobbies  = $sem_det['hobbies'];
+		$exam_name  = $sem_det['exam_name'];
+		$gender  = $sem_det['gender'];
+		
+}
+
+
+if($action=='feeedit'){
+
+
+
+	$sem_det = $db->getrow("SELECT * FROM es_feesnotice WHERE id=".$id);
+
+		if(isset($update) && $update!=""){
+
+		if(isset($update) && $update!=""){
+
+		//	  if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+
+		//if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+
+		//if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+
+	// if($class_name==''){ $errormessage['class_name'] = "Enter Class name";}
+
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+
+		//if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+
+		 //if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+
+		//if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}
+
+		//if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+
+		//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+
+  // if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Branch";}
+
+   if($hobbies==''){ $errormessage['hobbies'] = "Select  Class";}
+
+		 //if($rank==''){ $errormessage['rank'] = "Enter Division";}
+
+		//if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+
+		    }
+
+			$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+
+			if(count($errormessage)==0){
+
+			//	$db->update("es_bonafied","sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',hobbies='".$hobbies."'	,exam_name='".$exam_name."'","sno=".$id);
+
+				
+
+				
+
+				 $query="update es_feesnotice set sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',subject='".$subject."',fee='".$fee."',hobbies='".$hobbies.",exam_name='".$exam_name."' where id=".$id;
+
+				
+
+				mysql_query($query);
+
+				header("location:?pid=95&action=feelist&emsg=2");
+
+				exit;
+
+			}
+
+		
+
+		
+
+	
+
+		}
+
+		$sno1 = $sem_det['sno'];
+
+		$student_name = $sem_det['student_name'];
+
+		$father_name  = $sem_det['father_name'];
+
+		$mother_name = $sem_det['mother_name'];
+
+		//$class_name  = $sem_det['class_name'];
+
+		 $section  = $sem_det['section'];
+
+		$exam_date  = $sem_det['exam_date'];
+
+		
+
+		$rollnumber = $sem_det['roll_number'];
+
+		$marks_obtained = $sem_det['marks_obtained'];
+
+		$rank  = $sem_det['rank'];
+
+		 $dob= func_date_conversion("Y-m-d","d/m/Y",$sem_det['dob']);
+
+		$charector  = $sem_det['charector'];
+
+		$conduct  = $sem_det['conduct'];
+
+		$games  = $sem_det['games'];
+
+		$hobbies  = $sem_det['hobbies'];
+
+		$exam_name  = $sem_det['exam_name'];
+
+		$gender  = $sem_det['gender'];
+
+	
+		
+		$subject  = $sem_det['subject'];
+		
+		$fee  = $sem_det['fee'];
+
+		
+
+		
+
+}
+
+
+
+
+
+
+
+
+
+
+
+if($action=='print_feesnotice'){
+
+	$candidate_det_01 = $db->getrow("SELECT * FROM es_feesnotice WHERE id=".$id);
+
+								if(is_array($candidate_det_01)){
+
+									foreach($candidate_det_01 as $k=>$v){
+
+										if($v==""){$v=" --- ";}
+
+										$candidate_det[$k]=$v;
+
+										
+
+
+
+//array_print($candidate_det);
+
+									}
+
+									}
+
+								//array_print($candidate_det);
+
+
+
+
+
+}
+
+
+
+
+if($action=='print_attemptcertificate'){
+	$candidate_det_01 = $db->getrow("SELECT * FROM es_attemptcerti WHERE id=".$id);
+								if(is_array($candidate_det_01)){
+									foreach($candidate_det_01 as $k=>$v){
+										if($v==""){$v=" --- ";}
+										$candidate_det[$k]=$v;
+										
+
+//array_print($candidate_det);
+									}
+									}
+								//array_print($candidate_det);
+
+
+}
+
+
+
+
+
+
+if($action=='print_charactercertificate'){
+	$candidate_det_01 = $db->getrow("SELECT * FROM es_charcerti WHERE id=".$id);
+								if(is_array($candidate_det_01)){
+									foreach($candidate_det_01 as $k=>$v){
+										if($v==""){$v=" --- ";}
+										$candidate_det[$k]=$v;
+										
+
+//array_print($candidate_det);
+									}
+									}
+								//array_print($candidate_det);
+
+
+}
+
+if($action=='absentlist'){
+
+		$sql_qr = "SELECT * FROM es_studentabsentnoti where status !='Deleted' ";
+		$no_rec = sqlnumber($sql_qr);
+		$q= "SELECT * FROM es_preadmission where status !='Deleted' ";
+		$no_recs = sqlnumber($q);
+		if(!isset($start)){$start=0;}
+		$q_limit = 20;
+		$sql_qr .=" ORDER BY id  DESC LIMIT ".$start.",".$q_limit."";
+		$all_sem_det = $db->getrows($sql_qr);
+
+}
+if($action=="deleteabsent"){
+	
+$db->update("es_studentabsentnoti","status='Deleted'",'id='.$id );
+	header("location:?pid=95&action=absentlist&emsg=3");
+	}
+
+
+
+
+if($action=='absentadd'){
+
+$sno=$sno+1;
+if(isset($submit_from) && $submit_from!="" ){
+  //array_print($_POST);
+
+if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Branch";}
+   //if($hobbies==''){ $errormessage['hobbies'] = "Select  Class";}
+    if($es_preadmissionid==''){ $errormessage['es_preadmissionid'] = "Select Student ID";}
+		else{ 
+		
+	 $count="select count(*) from  es_studentabsentnoti where   sno='".$es_preadmissionid."' and status !='Deleted' ";
+$c =$db->getOne($count);
+  if($c!=0){$errormessage['student_name']  = " Bonafied Certificate already issued to this student";}
+
+	//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		//$count=getdata('es_bonafiedbank','count(student_name)','student_name="'.$student_name.'  " ');
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+  }
+	
+	    if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+		else{ 
+		
+	 $count="select count(*) from  es_studentabsentnoti where   student_name='".$es_preadmissionid."' and status !='Deleted' ";
+$c =$db->getOne($count);
+  if($c!=0){$errormessage['student_name']  = "Student Name Has Already Issued The Bonafied Certificate";}
+
+	//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+		//$count=getdata('es_bonafiedbank','count(student_name)','student_name="'.$student_name.'  " ');
+//  if($c!=0){$errormessage['student_name']  = "Student Name Already Exist";}
+  }
+  
+
+ // if($gender==''){ $errormessage['gender'] = "Select Gender";}
+		//if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+		//if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+	
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+		//if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+		 //if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+	//if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}
+		//if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+	
+		
+		 //if($rank==''){ $errormessage['rank'] = "Enter Division";}
+		if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+				
+	/*	if(isset($email) && $email!=""){
+				if(!$vlc->is_email($email)){$errormessage['email'] = "Enter Valid Email";}
+		}
+	*/		 
+	
+		if(count($errormessage)==0){
+		$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+	                      $message_arr = array( 
+						  "sno" =>$es_preadmissionid,	
+						  "date"  =>$date,							  
+						  "student_name"  =>$student_name,						  
+						  "father_name"  =>$father_name,	
+						  "mother_name"     =>$mother_name,	
+						  "class_name"    =>$es_classesid,
+						  "section"     =>$section,						  
+						   "gender"     =>$gender,
+						  "exam_name" =>$exam_name,	
+						  "exam_date"  =>$exam_date,	
+						  "roll_number"  =>$rollnumber,	
+						  "marks_obtained"  =>$marks_obtained,	
+						  "rank"     =>$rank,	
+						  "dob"    =>$dob,
+						  "section"     =>$section,
+						  
+						  
+						    "charector"  =>$charector,	
+						  "conduct"     =>$conduct,	
+						  "games"    =>$games,
+						  "hobbies"     =>$hobbies,
+						  "created_on" =>date("Y-m-d"),
+					       );
+					  $db->insert("es_studentabsentnoti",$message_arr);
+					  header("location:?pid=95&action=absentlist&emsg=1");
+       }
+    }
+}
+
+
+if($action=='absentedit'){
+
+	$sem_det = $db->getrow("SELECT * FROM es_studentabsentnoti WHERE id=".$id);
+		if(isset($update) && $update!=""){
+		if(isset($update) && $update!=""){
+		//	  if($student_name==''){ $errormessage['student_name'] = "Enter Student name";}
+		//if($father_name==''){ $errormessage['father_name'] = "Enter Father Name";}
+		//if($mother_name==''){ $errormessage['mother_name'] = "Enter Mother Name";}
+	// if($class_name==''){ $errormessage['class_name'] = "Enter Class name";}
+		/*if($section==''){ $errormessage['section'] = "Enter Class Section";}*/
+		//if($exam_name==''){ $errormessage['exam_name'] = "Enter Passed Exam Name";}
+		 //if($exam_date==''){ $errormessage['exam_date'] = "Enter Exam Year";}
+		//if($rollnumber==''){ $errormessage['rollnumber'] = "Enter Roll Number";}
+		//if($marks_obtained==''){ $errormessage['marks_obtained'] = "Enter Obtained Marks";}
+		//if($gender==''){ $errormessage['gender'] = "Select Your Gender";}
+  // if($es_classesid==''){ $errormessage['es_classesid'] = "Select  Branch";}
+   if($hobbies==''){ $errormessage['hobbies'] = "Select  Class";}
+		 //if($rank==''){ $errormessage['rank'] = "Enter Division";}
+		if($dob==''){ $errormessage['dob'] = "Enter Student Date Of Birth";}
+		    }
+			$dob=func_date_conversion("d/m/Y","Y-m-d",$dob);
+			if(count($errormessage)==0){
+			//	$db->update("es_bonafied","sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',hobbies='".$hobbies."'	,exam_name='".$exam_name."'","sno=".$id);
+				
+				
+				$query="update es_studentabsentnoti set sno='".$sno1."',gender='".$gender."',father_name ='".$father_name ."',mother_name ='".$mother_name ."',section  ='".$section."',exam_date='".$exam_date."',roll_number='".$rollnumber."',marks_obtained='".$marks_obtained."',rank='".$rank."',dob='".$dob."',charector='".$charector."',conduct='".$conduct."',games='".$games."',hobbies='".$hobbies."'	,exam_name='".$exam_name."' where id=".$id;
+				
+				mysql_query($query);
+				header("location:?pid=95&action=absentlist&emsg=2");
+				exit;
+			}
+		
+		
+	
+		}
+		$sno1 = $sem_det['sno'];
+		$student_name = $sem_det['student_name'];
+		$father_name  = $sem_det['father_name'];
+		$mother_name = $sem_det['mother_name'];
+		//$class_name  = $sem_det['class_name'];
+		 $section  = $sem_det['section'];
+		$exam_date  = $sem_det['exam_date'];
+		
+		
+		$rollnumber = $sem_det['roll_number'];
+		$marks_obtained = $sem_det['marks_obtained'];
+		$rank  = $sem_det['rank'];
+		 $dob= func_date_conversion("Y-m-d","d/m/Y",$sem_det['dob']);
+		$charector  = $sem_det['charector'];
+		$conduct  = $sem_det['conduct'];
+		$games  = $sem_det['games'];
+		$hobbies  = $sem_det['hobbies'];
+		$exam_name  = $sem_det['exam_name'];
+		$gender  = $sem_det['gender'];
+		
+}
+
+
+
+
+
+if($action=='print_studentabsentnoti'){
+	$candidate_det_01 = $db->getrow("SELECT * FROM es_studentabsentnoti WHERE id=".$id);
+								if(is_array($candidate_det_01)){
+									foreach($candidate_det_01 as $k=>$v){
+										if($v==""){$v=" --- ";}
+										$candidate_det[$k]=$v;
+										
+
+//array_print($candidate_det);
+									}
+									}
+								//array_print($candidate_det);
+
+
+}
+
+	
+
+?>

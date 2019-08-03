@@ -1,0 +1,30 @@
+1) Upload and unzip software on your server
+
+2) Create new database on server
+
+3) Create database username and password assign it to new database database
+
+4) Go to file and open following file in edit mode: "www.yourdomain.com/includes/constants.inc.php"
+
+5) Change setails regarding server as:
+'localhost' --> 'Your_server_name' (generally localhost)
+'db_user' --> 'database_user_name'
+'password' --> 'database_password'
+'db_name' --> 'Database_name'
+
+6) Upload databse SQL file from 'database/sample.sql' or 'empty.sql'
+
+7) Go to file and open following file in edit mode: "www.yourdomain.com/greatbritain/includes/config.php"
+
+8) Change setails regarding server as:
+'localhost' --> 'Your_server_name' (generally localhost)
+'db_user' --> 'database_user_name'
+'password' --> 'database_password'
+'db_name' --> 'Database_name'
+
+
+You are ready to go
+
+Admin User: admin
+Admin Password: admin
+

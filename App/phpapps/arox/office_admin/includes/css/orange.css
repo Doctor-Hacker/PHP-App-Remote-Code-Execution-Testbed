@@ -1,0 +1,289 @@
+
+			
+/*/////////////////left menu//////*/
+
+.bb1{ 	background:url(../../images/orange/O_1.gif) left bottom no-repeat;}
+.bb2{	background:url(../../images/orange/O_2.gif) left bottom repeat-x;}
+.bb3{	background:url(../../images/orange/O_3.gif) left bottom no-repeat;}
+
+
+.bb4{	background: url(../../images/orange/O_5.gif) #f6ab1a left top no-repeat;}
+.bb5{	background: url(../../images/orange/O_9.gif) #f6ab1a left top repeat-x;}
+.bb6{	background: url(../../images/orange/O_4.gif) #f6ab1a left top no-repeat;}
+
+
+.bb7{	background: url(../../images/orange/O_8.gif) left top no-repeat;}
+.bb8{	background: url(../../images/orange/O_7.gif) left top repeat-x;}
+.bb9{	background: url(../../images/orange/O_6.gif) left top no-repeat;}
+
+
+/*///////////////////////headerTable///////////////*/
+
+.rec1{	background: url(../../images/orange/rec1.gif) left bottom no-repeat;}
+.rec2{	background: url(../../images/orange/rec2.gif)left bottom no-repeat;}
+.rec3{	background: url(../../images/orange/rec_3.gif)left bottom no-repeat;}
+.rec4{	background: url(../../images/orange/rec4.gif) left top no-repeat;}
+.rec5{	background: url(../../images/orange/rec_5.jpg) left top no-repeat;}
+.rec6{	background: url(../../images/orange/rec6.gif) left top repeat-y;}
+.rec7{	background: url(../../images/orange/rec7.gif) left top repeat-y;}
+.rec8{	background: url(../../images/orange/rec9.gif) left top no-repeat;}
+.rec9{	background: url(../../images/orange/rec10.gif) left top repeat-x;}
+.rec10{ background:url(../../images/orange/rec11.gif) left top no-repeat;}
+
+/*//////////videobutton/*/
+
+.videos{ background:url(pink_img/vb.gif) left top repeat-x; border:none; height:23px; border:#666666 solid 1px;  font-size:11px; font-weight:bold; padding-bottom:5px; cursor:pointer; }
+.videos:hover{background:url(pink_img/vb_h.gif) left top repeat-x;}
+
+
+/*///////////workareabgcolour//////////////////*/
+
+.workbg{	background:#FFFFFF;}
+
+.work_midleareapadding{	padding:3px 5px; 0px 5px;}
+
+
+/*//////////////////////////buttons & Buttonbg///////////////*/
+
+.btn1{		background: url(../../images/orange/btn_01.gif) left top no-repeat;}
+.btn_mid{	background: url(../../images/orange/btn_02.gif) top left repeat-x;}
+.btn_rt{	background: url(../../images/orange/btn_03.gif) left top no-repeat;}
+
+
+.button{		font-size:11px; color:#000; cursor:pointer; text-decoration:none;}
+.button:hover{	text-decoration:none; color:#FFF; }
+
+/*//////////////////////rightsideheadings///////////*/
+
+
+.noticeboard{		background: url(../../images/orange/noticeboard.jpg) center top no-repeat;}
+.thoughtoftheday{ 	background: url(../../images/orange/todaysthought.jpg) center top no-repeat;}
+.calender{ 			background: url(../../images/orange/calender.jpg) center top no-repeat;}
+.holidays{			background: url(../../images/orange/holidays.jpg) center top no-repeat;}
+.gallery{ 			background: url(../../images/orange/gallery.jpg) center top no-repeat;}
+
+/*//////////////////middle work styles////////////////////////*/
+
+.headbg{ background: url(../../images/orange/b_h.gif) left top repeat-x; border-top:#FFFFFF solid 5px; padding-left:10px;}
+
+.tdmid_bg{	background:#FFAF1C; border-bottom: #FF6633 solid 1px; border-left:#FF6633 solid 1px; border-right:#FF6633 solid 1px; padding:12px;}
+
+.mid_bg2{	background:#FFAF1C; border:#FF6633 solid 1px; padding:12px; }
+
+
+
+/*///////////////////////////adminheading/////////*/
+
+
+.left_admin{ background: url(../../images/orange/adminmenu.gif) center top no-repeat;}
+.left_staff{ background:url(../../images/orange/staffmenu.gif) center top no-repeat;}
+.left_student{ background:url(../../images/orange/studentmenu.gif) center top no-repeat;}
+
+
+/*//////////////////*bottom//////////*/
+
+
+.footer{	color:#FFFFFF; font-weight:normal; font-size:12px;}
+
+
+
+
+
+
+
+/* Old CSS Developer End Start */
+
+.body_class{		margin:0px; margin-top:30px; background: url(../../images/orange/bg.gif) #FE8B25 center top fixed no-repeat ; font-family:Arial, Helvetica, sans-serif; font-size:12px;  color:#000000; text-decoration:none;  }
+
+.body_pop{	background-color:#FED59D; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000000; text-decoration:none; }
+
+.b_box_in{	border:#FFFFFF solid 1px; background:#FE922C; padding:1px; color:#FFFFFF;}
+
+.bgcolor_02{
+	background-color:#F5AC1F;
+	border:0 none;
+	color:#000000;
+	font-family:Tahoma;
+	font-size:12px;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+
+.holiday_big_font{
+	font-size:24px;
+	font-weight:bold;
+}
+
+.admin {
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	text-decoration: none;
+}
+.wel {
+	font-family: tahoma;
+	font-size: 12px;
+	text-decoration: none;
+	font-weight: normal;
+}
+.narmal {
+	font-family: tahoma;
+	padding:2px;
+	font-size: 12px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #000000;
+}
+.narmaltext {
+	font-family: tahoma;
+	font-size:10px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #000000;
+}
+.drop_size{
+	width:40px;
+	height:15px;
+}
+.bgtextcolor {
+	background-color:#EEFCFD;
+	color:#333333;
+	font-family: Tahoma;
+	font-size: 12px;
+	text-decoration: none;
+}
+.error_message{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-decoration:normal;
+	font-weight: bold;
+	color:#FF3333;
+}
+.message{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-decoration:normal;
+	font-weight: bold;
+	color:#990000;
+}
+.odd{
+	background-color:#FFFFFF;
+}
+.even{
+	background-color: #FED59D;
+}
+.success_message{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-size: 12px;
+	font-weight:bold;
+	text-decoration: none;
+	background-color: #3A302F;
+}
+.error_messages{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-size: 12px;	
+	text-decoration: none;
+	background-color: #A80928;
+}
+.tbl_grid{
+	border: 1px solid #F5AC1F;  
+	border-collapse:collapse;
+}
+.tb2_grid{
+	border: 2px solid #F5AC1F;  
+	
+}
+
+.adminfont {
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color:  #333333;
+	text-decoration: none;
+}
+.admin:hover {
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	text-decoration: none;
+}
+.adminfont:hover {
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color:  #333333;
+	text-decoration: none;
+}
+.footer_link {
+	
+	font-size: 12px;	
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.footer_link:hover {
+	
+	font-size: 12px;	
+	color: #990000;
+	text-decoration: none;
+}
+
+.header_link {	
+	font-size: 12px;	
+	color: #000000;
+	text-decoration: none;
+	font-weight:bold;
+}
+.header_link:hover {	
+	font-size: 12px;	
+	color: #333333;
+	text-decoration: none;
+	font-weight:bold;
+}
+.video_link {
+	
+	font-size: 12px;	
+	color: #000066;
+	text-decoration: none;
+}
+.video_link:hover {
+	
+	font-size: 12px;	
+	color: #990000;
+	text-decoration: none;
+}
+/* pagination */
+table.boxPagination{
+	/*font-size:0.9em;*/
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+table.boxPagination a:hover {
+background-color:#DF970D;
+border:1px solid #DF970D;
+color:#FFFFFF;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+table.boxPagination a {
+font-family:Verdana, Arial, Helvetica, sans-serif;
+background:#FFFFFF none repeat scroll 0 0;
+border:1px solid #DF970D;
+color:#DF970D;
+display:block;
+font-size:12px;
+padding:2px 6px;
+text-decoration:none;
+}
+
+.welcometxt {
+	color:#C10000;
+	font-weight:bold;
+}

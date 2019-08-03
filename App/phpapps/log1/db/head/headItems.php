@@ -1,0 +1,1 @@
+<?php $headItems = array( "title" => "log1 CMS", "desc" => "log1cms official page", "language" => "0", "bgcolor" => "#ffffff", "textcolor" => "#999999", "specialcolor" => "#000000", "googleLogin" => "gerard.caplain", "email" => "log_1[ at ]users.sourceforge.net", "copyright" => "2010 by log1", "template" => "1", "key" => "log1, log 1, CMS, content managment system", ); ?>

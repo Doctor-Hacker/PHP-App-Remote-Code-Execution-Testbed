@@ -1,0 +1,21 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	font-family: tahoma;
+	font-size: 12px;
+}
+.bg1banner{
+background-image:url(../../images/banner_main.jpg);
+background-repeat:no-repeat;
+}
+.success_message{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-size: 12px;
+	font-weight:bold;
+	text-decoration: none;
+	background-color:#339933;
+}

@@ -1,0 +1,12 @@
+date	requestor's IP	type	user ID	user name	outcome	authority	additional information
+2019-07-08 16:35:50	192.168.0.100	Installed			Success	zp_admin	version 1.4.1.4[8157]
+		Set Security log permissions			Failed		File permissions of Security log are 0666
+2019-07-08 16:36:27	192.168.0.100	Request add user			Success	zp_admin	admin
+2019-07-08 16:37:09	192.168.0.100	Request add user			Success	zp_admin	admin
+2019-07-08 16:37:10	192.168.0.100	Blocked access			Failed		/zp-core/admin-users.php?saved=&amp;xsrftoken=4d453a8d8b40163b02ce58d008c3b78108549905&amp;show-admin=&amp;page=users
+2019-07-08 16:38:04	192.168.0.100	Request update user	admin	Admin	Success	zp_admin	admin
+2019-07-08 16:38:04	192.168.0.100	Request add user	admin	Admin	Success	zp_admin	hacklab
+2019-07-08 16:39:13	192.168.0.100	Blocked access			Failed		/zp-core/admin-users.php?saved=&amp;xsrftoken=41a998cd595ac3749f4d653f19fd59d94764aade&amp;show-hacklab=&amp;page=users
+2019-07-08 16:39:42	192.168.0.100	Request update user	hacklab	Hacklab	Success	zp_admin	hacklab
+2019-07-08 16:40:22	192.168.0.100	Blocked access			Failed		/zp-core/admin-users.php?page=users
+2019-07-09 06:41:12	192.168.0.100	Blocked access			Failed		/zp-core/admin-users.php?page=users

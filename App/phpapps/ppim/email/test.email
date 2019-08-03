@@ -1,0 +1,5 @@
+<?php
+$mailserver = "server1";
+$username = "test";
+$password = "test123";
+?>

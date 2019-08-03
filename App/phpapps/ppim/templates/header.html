@@ -1,0 +1,24 @@
+<?php
+session_start();
+if (@file('password.dat'))
+{
+   if (!isset($_SESSION['loggedin']))
+   {
+   	  if (!isset($_GET['login']))
+   	  {
+   	   	 header("Location: login.php?login=1");
+   	  	 exit;
+   	  }
+   }
+ }
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>pPIM</title>
+
+<link rel="stylesheet" href="style.css" media="screen" title="default" /> 
+<link rel="alternate stylesheet" href="slate_style.css" media="screen" title="Slate" />
+<link rel="alternate stylesheet" href="templates/enhanced.css" media="screen" title="Enhanced" />
+<script type="text/javascript" src="styleswitcher.js"></script>

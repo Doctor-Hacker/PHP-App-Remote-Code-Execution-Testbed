@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="MMGuideColor" value="#00FF00" />
+	<infoitem key="MMGuideVisible" value="true" />
+	<infoitem key="MMGuideLocked" value="false" />
+	<infoitem key="MMSnapToGuide" value="true" />
+	<infoitem key="MMGuidesSnapToElements" value="true" />
+	<infoitem key="MMDistanceColor" value="#0000FF" />
+	<infoitem key="MMGuideCount" value="9" />
+	<infoitem key="MMGuide0" value="vertical: user 1075 px" />
+	<infoitem key="MMGuide1" value="vertical: user 0 px" />
+	<infoitem key="MMGuide2" value="vertical: user 108 px" />
+	<infoitem key="MMGuide3" value="vertical: user 108 px" />
+	<infoitem key="MMGuide4" value="vertical: user 125 px" />
+	<infoitem key="MMGuide5" value="vertical: user 76 px" />
+	<infoitem key="MMGuide6" value="vertical: user 47 px" />
+	<infoitem key="MMGuide7" value="vertical: user 97 px" />
+	<infoitem key="MMGuide8" value="vertical: user 37 px" />
+</info>

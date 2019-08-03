@@ -1,0 +1,303 @@
+.error_msg{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-decoration:none;
+	color:#F00;
+}
+.error_border{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-decoration:none;
+	color:#F00;
+	border:#F00 solid 1px;
+}
+			
+/*/////////////////left menu//////*/
+
+.bb1{	background: url(../../images/violet/b1.gif) left bottom no-repeat;}
+.bb2{	background: url(../../images/violet/b2.gif) left bottom repeat-x;}
+.bb3{	background: url(../../images/violet/b3.gif) left bottom no-repeat;}
+
+
+.bb4{	background: url(../../images/violet/b4.gif) #BECFE3 left top no-repeat;}
+.bb5{	background: url(../../images/violet/b5.gif) #BECFE3 left top repeat-x;}
+.bb6{	background: url(../../images/violet/b6.gif) #BECFE3 left top no-repeat;}
+
+
+.bb7{	background: url(../../images/violet/b7.gif) left top no-repeat;}
+.bb8{	background: url(../../images/violet/b8.gif) left top repeat-x;}
+.bb9{	background: url(../../images/violet/b9.gif) left top no-repeat;}
+
+
+/*///////////////////////headerTable///////////////*/
+
+.rec1{	background: url(../../images/violet/v1.gif) left bottom no-repeat;}
+.rec2{	background: url(../../images/violet/v2.gif) left bottom no-repeat;}
+.rec3{	background: url(../../images/violet/v3.gif) left bottom no-repeat;}
+.rec4{	background: url(../../images/violet/v4.gif) left top no-repeat;}
+.rec5{	background: url(../../images/violet/banner.jpg) left top no-repeat;}
+.rec6{	background: url(../../images/violet/v6.gif) left top repeat-y;}
+.rec7{	background: url(../../images/violet/v7.gif) left top repeat-y;}
+.rec8{	background: url(../../images/violet/v9.gif) left top no-repeat;}
+.rec9{	background: url(../../images/violet/v10.gif) left top repeat-x;}
+.rec10{	background: url(../../images/violet/v11.gif) left top no-repeat;}
+
+/*//////////videobutton/*/
+
+.videos{ background:url(green_img/vb.gif) left top repeat-x; border:none; height:23px; border:#666666 solid 1px;  font-size:11px; font-weight:bold; padding-bottom:5px; cursor:pointer; }
+.videos:hover{background:url(green_img/vb_h.gif) left top repeat-x;}
+
+
+/*///////////workareabgcolour//////////////////*/
+
+.workbg{	background:#FFFFFF;}
+
+.work_midleareapadding{	padding:3px 5px; 0px 5px;}
+
+
+/*//////////////////////////buttons & Buttonbg///////////////*/
+
+.btn1{		background: url(../../images/violet/btn_01.gif)left top no-repeat;}
+.btn_mid{	background: url(../../images/violet/btn_02.gif)  top left repeat-x;}
+.btn_rt{	background: url(../../images/violet/btn_03.gif) left top no-repeat;}
+
+
+.button{		font-size:11px; color:#000; cursor:pointer; text-decoration:none;}
+.button:hover{	text-decoration:none; color:#FFF; }
+
+/*//////////////////////rightsideheadings///////////*/
+
+
+.noticeboard{		background:url(../../images/violet/noticeboard.jpg) center top no-repeat;}
+.thoughtoftheday{   background:url(../../images/violet/todaysthought.jpg) center top no-repeat;}
+.calender{ 			background:url(../../images/violet/calender.jpg) center top no-repeat;}
+.holidays{			background: url(../../images/violet/holidays.jpg) center top no-repeat;}
+.gallery{ 			background: url(../../images/violet/gallery.jpg) center top no-repeat;}
+
+/*//////////////////middle work styles////////////////////////*/
+
+
+.headbg{ background: url(../../images/violet/v_h.gif) left top repeat-x; border-top:#FFFFFF solid 5px; padding-left:10px;}
+
+.tdmid_bg{	background:#BECFE3; border-bottom:#80A0C6 solid 1px; border-left:#80A0C6 solid 1px; border-right:#80A0C6 solid 1px; padding:12px;}
+
+.mid_bg2{	background:#BECFE3; border:#80A0C6 solid 1px; padding:12px; }
+
+
+
+/*///////////////////////////adminheading/////////*/
+
+
+.left_admin{   background:url(../../images/violet/adminmenu.jpg) center top no-repeat;}
+.left_staff{ background:url(../../images/violet/staffmenu.jpg) center top no-repeat;}
+.left_student{ background:url(../../images/violet/studentmenu.jpg) center top no-repeat;}
+
+
+/*//////////////////*bottom//////////*/
+
+
+.footer{	color:#FFFFFF; font-weight:normal; font-size:12px;}
+
+
+
+
+
+
+
+/* Old CSS Developer End Start */
+
+.body_class{		margin:0px; margin-top:30px;  background: url(../../images/violet/bg.gif) #BECFE3 center top fixed no-repeat ; font-family:Arial, Helvetica, sans-serif; font-size:12px;  color:#000000; text-decoration:none;  }
+
+.body_pop{	background-color:#D1DFEF; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000000; text-decoration:none; }
+
+.b_box_in{	border:#FFFFFF solid 1px; background:#59799F; padding:1px; color:#FFFFFF;}
+
+.bgcolor_02{
+	background-color:#80A0C6;
+	border:0 none;
+	color:#000000;
+	font-family:Tahoma;
+	font-size:12px;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+
+.holiday_big_font{
+	font-size:24px;
+	font-weight:bold;
+}
+
+.admin {
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	text-decoration: none;
+}
+.wel {
+	font-family: tahoma;
+	font-size: 12px;
+	text-decoration: none;
+	font-weight: normal;
+}
+.narmal {
+	font-family: tahoma;
+	padding:2px;
+	font-size: 12px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #000000;
+}
+.narmaltext {
+	font-family: tahoma;
+	font-size:10px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #000000;
+}
+.drop_size{
+	width:40px;
+	height:15px;
+}
+.bgtextcolor {
+	background-color:#EEFCFD;
+	color:#333333;
+	font-family: Tahoma;
+	font-size: 12px;
+	text-decoration: none;
+}
+.error_message{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-decoration:normal;
+	font-weight: bold;
+	color:#FF3333;
+}
+.message{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-decoration:normal;
+	font-weight: bold;
+	color:#990000;
+}
+.odd{
+	background-color:#FFFFFF;
+}
+.even{
+	background-color: #D1DFEF;
+}
+.success_message{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-size: 12px;
+	font-weight:bold;
+	text-decoration: none;
+	background-color: #3A302F;
+}
+.error_messages{
+	font:Verdana;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+	font-size: 12px;	
+	text-decoration: none;
+	background-color: #A80928;
+}
+.tbl_grid{
+	border: 1px solid #80A0C6;  
+	border-collapse:collapse;
+}
+.tb2_grid{
+	border: 2px solid #80A0C6;  
+	
+}
+
+.adminfont {
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color:  #333333;
+	text-decoration: none;
+}
+.admin:hover {
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	text-decoration: none;
+}
+.adminfont:hover {
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color:  #333333;
+	text-decoration: none;
+}
+.footer_link {
+	
+	font-size: 12px;	
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.footer_link:hover {
+	
+	font-size: 12px;	
+	color: #990000;
+	text-decoration: none;
+}
+
+.header_link {	
+	font-size: 12px;	
+	color: #000000;
+	text-decoration: none;
+	font-weight:bold;
+}
+.header_link:hover {	
+	font-size: 12px;	
+	color: #333333;
+	text-decoration: none;
+	font-weight:bold;
+}
+.video_link {
+	
+	font-size: 12px;	
+	color: #000066;
+	text-decoration: none;
+}
+.video_link:hover {
+	
+	font-size: 12px;	
+	color: #990000;
+	text-decoration: none;
+}
+
+/* pagination */
+table.boxPagination{
+	/*font-size:0.9em;*/
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+table.boxPagination a:hover {
+background-color:#59799F;
+border:1px solid #59799F;
+color:#FFFFFF;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+table.boxPagination a {
+font-family:Verdana, Arial, Helvetica, sans-serif;
+background:#FFFFFF none repeat scroll 0 0;
+border:1px solid #59799F;
+color:#59799F;
+display:block;
+font-size:12px;
+padding:2px 6px;
+text-decoration:none;
+}
+
+.welcometxt {
+	color:#FFFFFF;
+	font-weight:bold;
+}
