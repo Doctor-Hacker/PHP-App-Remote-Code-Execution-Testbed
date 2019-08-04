@@ -4,6 +4,13 @@ Rem Doctor_Hacker@twitter
 Rem 03/08/2019
 
 CLS
+Rem if webid then alter a file.  www\includes\config.inc.php must have path the www.
+set mypath=%cd%\phpapps\webid\includes\config.inc.php
+set mypath2=%cd%\www\
+set mypath2=%mypath2:\=\\%
+
+echo ^<^?php $DbHost = ^"localhost^"; $DbDatabase = ^"webid^"; $DbUser	 = ^"root^"; $DbPassword = ^"hacklab2019^"; $DBPrefix	= ^"webid_^"; $main_path	= ^"%mypath2%"; $MD5_PREFIX = "7548744d014f15c0add4a958f338053c^"; ^?^> >%mypath%
+
 ECHO ...............................................................................
 ECHO ** Remotely exploitable PHP/MySQL Applications on a USB stick - By Doctor_Hacker.
 ECHO ...............................................................................
@@ -30,7 +37,6 @@ ECHO l - Zenphoto 1.4.1.4
 ECHO x - EXIT
 ECHO.
 
-
 CHOICE /C abcdefghijklx /N /M "Choose the PHP app that you want to install under UniServerZ or press x to EXIT."
 IF ERRORLEVEL 1 SET M=arox & SET d=icampus
 IF ERRORLEVEL 2 SET M=bozon & SET d=null
@@ -46,6 +52,11 @@ IF ERRORLEVEL 11 SET M=webspell & SET d=webspell
 IF ERRORLEVEL 12 SET M=zenphoto & SET d=zenphoto
 IF ERRORLEVEL 13 GOTO:EOF
 
+
+Rem make folder tmp and db_backup_restore if they dont exist
+if not exist "tmp" mkdir tmp
+if not exist "db_backup_restore" mkdir db_backup_restore
+
 Rem Delete everything in the www folder.
 echo ***** Deleting and re-creating the www folder.
 rmdir www /S /Q
@@ -53,7 +64,7 @@ mkdir www
 
 Rem now copy the required folder contents to the www folder.
 echo ***** Copying files to www folder. This may take a minute...
-xcopy .\phpapps\%M% .\www\  /s /e >nul
+xcopy .\phpapps\%M% .\www\  /s /e /q
 
 echo ***** Ready to run Unicontroller 
 Pause
@@ -61,11 +72,14 @@ Pause
 Rem now start Unicontroller if not already started. 
 tasklist /nh /fi "imagename eq UniController.exe" | find /i "UniController.exe" > nul || (echo Running Unicontroller - it should start Apache and MySQL automatically - unless another app is running on port 80 && start .\UniController.exe pc_win_start)
 
+Rem Small delay to wait for services to start.
+PING localhost -n 5 >NUL
+
 echo ***** Ready to import the MySQL database.
 Pause
 Rem Import the database if needed. Not important that the password is here!
 if NOT %d% == null ( 
-echo Importing MySQL database....
+echo ***** Importing MySQL database....
 .\core\mysql\bin\mysql.exe -uroot %d% -phacklab2019 < sql\%d%.sql
 )
 
