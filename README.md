@@ -40,6 +40,8 @@ You can then browse to 127.0.0.1 to see the installed application.
 ![alt text](https://github.com/Doctor-Hacker/PHP-App-Remote-Code-Execution-Testbed/blob/master/menu6.png)
 
 
+Now try to exploit the app.
+
 Note: Use at your own risk and only for legal purposes.
 
 Doctor_Hacker@twitter.
