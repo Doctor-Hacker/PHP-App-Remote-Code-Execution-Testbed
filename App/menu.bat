@@ -4,6 +4,12 @@ Rem Doctor_Hacker@twitter
 Rem 03/08/2019
 
 CLS
+
+Rem make folder tmp and db_backup_restore if they dont exist
+if not exist "tmp" mkdir tmp
+if not exist "db_backup_restore" mkdir db_backup_restore
+if not exist %cd%\core\apache2\logs mkdir %cd%\core\apache2\logs
+
 Rem if webid then alter a file.  www\includes\config.inc.php must have path the www.
 set mypath=%cd%\phpapps\webid\includes\config.inc.php
 set mypath2=%cd%\www\
@@ -53,9 +59,6 @@ IF ERRORLEVEL 12 SET M=zenphoto & SET d=zenphoto
 IF ERRORLEVEL 13 GOTO:EOF
 
 
-Rem make folder tmp and db_backup_restore if they dont exist
-if not exist "tmp" mkdir tmp
-if not exist "db_backup_restore" mkdir db_backup_restore
 
 Rem Delete everything in the www folder.
 echo ***** Deleting and re-creating the www folder.
