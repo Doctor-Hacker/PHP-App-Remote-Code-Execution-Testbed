@@ -4,7 +4,7 @@ _Abertay students wishing to have a paly with this app, note that it will be use
 
 I may also use this app for the 3rd year CMP319 web app testing module and also the CMP320 exploit development module but in the mean-time I more interested about its suitability for the 2nd year coursework.
 
-Feedback to me would be useful!!_
+Feedback to me would be useful!!
 
 
 **Purpose:**
