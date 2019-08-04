@@ -1,6 +1,8 @@
 # PHP-App-Remote-Code-Execution-Testbed
 
-_Abertay students note that this app will be used to generate a different remotely exploitable web app for each student for the 2nd year Network investigation coursework. **The aim is for the students to find a working exploit on the Internet and use it to gain a shell**. The exploits I have found or written work under PHP, Python 2.6 and Python 3.x (search in exploit-db.com) and github This app is a testbed for the students to investigate the PHP app before exploiting. If credentials are required then they may be on the webpage someplace or perhaps dfaults have been used (e.g. admin/password)._
+_Abertay students note that this app will be used to generate a different remotely exploitable web app for each student for the 2nd year Network investigation coursework. **In the first instance, The aim is for the students to find a working exploit on the Internet and use it to gain a shell**. The exploits I have found or written work under PHP, Python 2.6 and Python 3.x (search in exploit-db.com) and github This app is a testbed for the students to investigate the PHP app before exploiting. If credentials are required then they may be on the webpage someplace or perhaps dfaults have been used (e.g. admin/password)._
+
+I may also use this app for the 3rd year CMP319 web app testing module and also the CMP320 exploit development module but in the mean-time I more interested about its suitability for the 2nd year coursework.
 
 Feedback to me would be useful!!_
 
