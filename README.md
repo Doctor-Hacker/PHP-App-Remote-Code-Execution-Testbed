@@ -8,7 +8,7 @@ _Note that I use this application to generate different vulnerable applications 
 The apps can be exploited (1) Using manual techniques (2) Using exploits that are available on the Internet (e.g. exploit-db.com or github). There are exploits available for each of these apps (I have checked to make sure they work). You may also wish to try to create your own exploits.
 
 **Usage:** 
-Download the application and extract it to a folder andthen  run **menu.bat**. The install menu and all the available applications will be shown:-
+Download the application, extract it to a folder and then run **menu.bat**. The install menu and all the available applications will be shown:-
 
 ![alt text](https://github.com/Doctor-Hacker/PHP-App-Remote-Code-Execution-Testbed/blob/master/menu.png)
 
@@ -37,6 +37,6 @@ Now try to exploit the app.
 
 _If credentials are required then they may be on the webpage someplace or perhaps defaults have been used (e.g. admin/password)._
 
-Note: Use at your own risk and only for legal purposes.
+Note: Use at your own risk and only for legal purposes.  
 
 Doctor_Hacker@twitter.
