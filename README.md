@@ -1,12 +1,5 @@
 # PHP-App-Remote-Code-Execution-Testbed
 
-_Abertay students wishing to have a play with this app, note that it will be used to generate a different remotely exploitable web app for each student for the 2nd year Network investigation coursework. **In the first instance, the aim is for the students to find a working exploit on the Internet and use it to gain a shell**. The exploits I have found work under PHP, Python 2.6 and Python 3.x (search in exploit-db.com and github to find them). This app is a testbed for the students to investigate the PHP app before exploiting. If credentials are required then they may be on the webpage someplace or perhaps defaults have been used (e.g. admin/password)._
-
-I may also use this app for the 3rd year CMP319 web app testing module and also the CMP320 exploit development module but in the mean-time I more interested about its suitability for the 2nd year coursework.
-
-Feedback to me would be useful!!
-
-
 **Purpose:**
 This application has been designed to allow the user to practice remote code execution techniques against real applications without the hassle of installing the apps. It has been build under "Uniform Server" (UniServerZ) which is a free lightweight WAMP (Windows/Apache/MySQL/Php) server solution for Windows. UniServerZ runs from a USB (or in this case, a single folder). The vulnerable PHP apps have been downloaded mainly from https://www.exploit-db.com 
 
@@ -41,6 +34,8 @@ You can then browse to 127.0.0.1 to see the installed application.
 
 
 Now try to exploit the app.
+
+If credentials are required then they may be on the webpage someplace or perhaps defaults have been used (e.g. admin/password)._
 
 Note: Use at your own risk and only for legal purposes.
 
