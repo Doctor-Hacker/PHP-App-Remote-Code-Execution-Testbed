@@ -20,7 +20,7 @@ After pressing any key, the UniServerZ app will be executed.
 
 ![alt text](https://github.com/Doctor-Hacker/PHP-App-Remote-Code-Execution-Testbed/blob/master/menu3.png)
 
-You should find that UniServerZ is running in the tool bar. PHP and MYSQL should be running.
+You should find that UniServerZ is running in the tool bar. PHP and MYSQL should be running. If they are not, check that no other app is using the relevant ports.
 
 ![alt text](https://github.com/Doctor-Hacker/PHP-App-Remote-Code-Execution-Testbed/blob/master/menu4.png)
 
