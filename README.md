@@ -35,7 +35,7 @@ You can then browse to 127.0.0.1 to see the installed application.
 
 Now try to exploit the app.
 
-If credentials are required then they may be on the webpage someplace or perhaps defaults have been used (e.g. admin/password)._
+_If credentials are required then they may be on the webpage someplace or perhaps defaults have been used (e.g. admin/password)._
 
 Note: Use at your own risk and only for legal purposes.
 
